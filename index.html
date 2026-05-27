@@ -2,542 +2,546 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3781802896099948"
-     crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sorteador.io — Gera Números Aleatórios, Dados, Lotaria & Mais</title>
-  <meta name="description" content="Gera números aleatórios, sorteia lotaria, lança dados, moedas e muito mais. Rápido, grátis e sem registo."/>
+  <title>Gerador de Números Aleatórios Online | Lotaria, Dados, Moeda — numerossortear.com</title>
+  <meta name="description" content="Gera números aleatórios online de forma gratuita. Chaves para Euromilhões e Totoloto, dados virtuais, lança moeda, gerador de senhas seguras e sorteio de opções. Sem registo, 100% grátis."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg: #080b10;
-      --surface: #0f1420;
-      --surface2: #161d2e;
-      --border: rgba(255,255,255,0.07);
-      --accent: #00f5c4;
-      --accent2: #ff5f57;
-      --accent3: #ffd166;
-      --text: #e8eaf2;
-      --muted: #5a6072;
-      --glow: 0 0 30px rgba(0,245,196,0.25);
-      --radius: 16px;
+      --bg:       #f7f8fa;
+      --white:    #ffffff;
+      --border:   #e4e7ed;
+      --text:     #1a1d23;
+      --muted:    #8a90a0;
+      --faint:    #f0f2f5;
+
+      /* Tool accent palette — soft, harmonious */
+      --c1: #4f7ef8;   /* blue    — números */
+      --c2: #e8a020;   /* amber   — lotaria */
+      --c3: #e05a3a;   /* coral   — dados   */
+      --c4: #9b6fe8;   /* violet  — moeda   */
+      --c5: #2caa7e;   /* teal    — senha   */
+      --c6: #e8507a;   /* rose    — escolha */
+
+      --radius: 6px;
+      --card-radius: 12px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.07);
+      --shadow-lg: 0 4px 24px rgba(0,0,0,0.10);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Noise texture */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 0; opacity: 0.4;
-    }
-
-    /* Grid background */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image:
-        linear-gradient(rgba(0,245,196,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,245,196,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none; z-index: 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
     }
 
     /* ── Header ── */
     header {
-      position: relative; z-index: 10;
-      padding: 20px 40px;
-      display: flex; align-items: center; justify-content: space-between;
+      background: var(--white);
       border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-      background: rgba(8,11,16,0.7);
-      position: sticky; top: 0;
+      padding: 0 40px;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
     }
 
     .logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      letter-spacing: 3px;
-      color: var(--accent);
-      text-shadow: 0 0 20px var(--accent);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
     }
+    .logo span { color: var(--c1); }
 
-    .logo span { color: var(--text); text-shadow: none; }
-
-    nav { display: flex; gap: 24px; }
+    nav { display: flex; gap: 6px; }
     nav a {
-      color: var(--muted); font-size: 0.85rem; text-decoration: none;
-      font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-      transition: color 0.2s;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      transition: background 0.15s, color 0.15s;
     }
-    nav a:hover { color: var(--accent); }
+    nav a:hover { background: var(--faint); color: var(--text); }
 
     /* ── Hero ── */
     .hero {
-      position: relative; z-index: 1;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 40px 48px;
       text-align: center;
-      padding: 80px 20px 40px;
     }
 
-    .hero-badge {
-      display: inline-block;
-      background: rgba(0,245,196,0.1);
-      border: 1px solid rgba(0,245,196,0.3);
-      color: var(--accent);
-      font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 3px; text-transform: uppercase;
-      padding: 6px 16px; border-radius: 100px;
-      margin-bottom: 24px;
-    }
-
-    h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3.5rem, 10vw, 8rem);
-      line-height: 0.9;
-      letter-spacing: 4px;
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #eef2ff;
+      color: var(--c1);
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 100px;
       margin-bottom: 20px;
     }
 
-    h1 .line1 { display: block; color: var(--text); }
-    h1 .line2 {
-      display: block; color: var(--accent);
-      text-shadow: 0 0 40px rgba(0,245,196,0.5);
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 14px;
     }
+    .hero h1 span { color: var(--c1); }
 
     .hero p {
-      color: var(--muted); font-size: 1.1rem;
-      max-width: 520px; margin: 0 auto 40px;
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
     }
 
-    /* ── Ad Banner (top) ── */
+    /* ── Ad banner ── */
     .ad-banner {
-      position: relative; z-index: 1;
-      margin: 0 auto 48px;
-      max-width: 728px; height: 90px;
-      border: 1px dashed rgba(255,255,255,0.1);
+      background: var(--white);
+      border: 1px dashed var(--border);
       border-radius: 8px;
+      height: 90px;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.02);
       color: var(--muted); font-size: 0.7rem;
-      letter-spacing: 2px; text-transform: uppercase;
+      letter-spacing: 1px; text-transform: uppercase;
+      position: relative; max-width: 728px; margin: 0 auto;
     }
     .ad-banner::before {
       content: 'Publicidade';
-      position: absolute; top: -10px; left: 16px;
-      background: var(--bg); padding: 0 8px;
+      position: absolute; top: -9px; left: 14px;
+      background: var(--white); padding: 0 6px;
       font-size: 0.6rem; color: var(--muted);
     }
+    .ad-wrap { padding: 28px 40px 0; }
 
-    /* ── Main Layout ── */
+    /* ── Layout ── */
     .container {
-      position: relative; z-index: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px 80px;
+      max-width: 1080px;
+      margin: 32px auto;
+      padding: 0 24px;
       display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 32px;
+      grid-template-columns: 1fr 280px;
+      gap: 24px;
       align-items: start;
     }
 
-    /* ── Sidebar Ad ── */
-    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+    /* ── Cards ── */
+    .tools { display: flex; flex-direction: column; gap: 16px; }
 
-    .ad-sidebar {
-      background: rgba(255,255,255,0.02);
-      border: 1px dashed rgba(255,255,255,0.1);
-      border-radius: 8px;
-      height: 250px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted); font-size: 0.7rem;
-      letter-spacing: 2px; text-transform: uppercase;
-      position: relative;
-    }
-    .ad-sidebar::before {
-      content: 'Publicidade';
-      position: absolute; top: -10px; left: 16px;
-      background: var(--bg); padding: 0 8px;
-      font-size: 0.6rem; color: var(--muted);
-    }
-
-    /* ── Tool Cards ── */
-    .tools { display: flex; flex-direction: column; gap: 20px; }
-
-    .tool-card {
-      background: var(--surface);
+    .card {
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-      transition: border-color 0.3s, transform 0.2s;
-      position: relative; overflow: hidden;
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .tool-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      opacity: 0; transition: opacity 0.3s;
+    .card-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 24px 0;
     }
 
-    .tool-card:hover { border-color: rgba(0,245,196,0.2); }
-    .tool-card:hover::before { opacity: 1; }
-
-    .tool-card.active-tool {
-      border-color: rgba(0,245,196,0.3);
-      box-shadow: var(--glow);
-    }
-    .tool-card.active-tool::before { opacity: 1; }
-
-    .tool-header {
-      display: flex; align-items: center; gap: 14px; margin-bottom: 24px;
-    }
-
-    .tool-icon {
-      width: 44px; height: 44px; border-radius: 10px;
+    .card-icon {
+      width: 38px; height: 38px; border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-      background: rgba(0,245,196,0.1);
-      border: 1px solid rgba(0,245,196,0.2);
-      flex-shrink: 0;
+      font-size: 1.1rem; flex-shrink: 0;
     }
 
-    .tool-icon.red { background: rgba(255,95,87,0.1); border-color: rgba(255,95,87,0.2); }
-    .tool-icon.yellow { background: rgba(255,209,102,0.1); border-color: rgba(255,209,102,0.2); }
-    .tool-icon.purple { background: rgba(180,100,255,0.1); border-color: rgba(180,100,255,0.2); }
-    .tool-icon.blue { background: rgba(80,150,255,0.1); border-color: rgba(80,150,255,0.2); }
+    .card-icon.c1 { background: #eef2ff; }
+    .card-icon.c2 { background: #fef6e4; }
+    .card-icon.c3 { background: #fdf1ee; }
+    .card-icon.c4 { background: #f3eeff; }
+    .card-icon.c5 { background: #e6f7f2; }
+    .card-icon.c6 { background: #fdedf2; }
 
-    .tool-title { font-size: 1.1rem; font-weight: 700; }
-    .tool-desc { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+    .card-title { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .card-desc  { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
 
-    /* Controls */
-    .controls { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; align-items: flex-end; }
+    .card-body { padding: 20px 24px 24px; }
 
-    .field { display: flex; flex-direction: column; gap: 6px; }
-    .field label { font-size: 0.72rem; color: var(--muted); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+    .divider {
+      height: 1px; background: var(--border); margin: 0 24px;
+    }
 
-    .field input[type="number"], .field input[type="text"], .field select {
-      background: var(--surface2);
+    /* ── Controls ── */
+    .controls {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      align-items: flex-end; margin-bottom: 18px;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label {
+      font-size: 0.7rem; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .field input[type="number"],
+    .field input[type="text"],
+    .field select {
+      background: var(--faint);
       border: 1px solid var(--border);
       color: var(--text);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.95rem;
-      padding: 10px 14px;
-      border-radius: 8px;
-      width: 120px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 9px 12px;
+      border-radius: var(--radius);
+      width: 110px;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
-
     .field input:focus, .field select:focus {
-      border-color: rgba(0,245,196,0.4);
+      border-color: var(--c1);
+      box-shadow: 0 0 0 3px rgba(79,126,248,0.12);
     }
 
-    /* Checkbox */
     .checkbox-label {
       display: flex; align-items: center; gap: 8px;
-      font-size: 0.85rem; color: var(--muted); cursor: pointer;
+      font-size: 0.84rem; color: var(--muted); cursor: pointer;
       user-select: none;
     }
-    .checkbox-label input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; }
+    .checkbox-label input[type="checkbox"] {
+      accent-color: var(--c1); width: 15px; height: 15px;
+    }
 
-    /* Buttons */
+    /* ── Buttons ── */
     .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 12px 28px; border-radius: 10px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.9rem; font-weight: 700;
-      letter-spacing: 0.5px;
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem; font-weight: 600;
       cursor: pointer; border: none;
-      transition: all 0.2s;
+      transition: all 0.15s;
+      letter-spacing: 0.1px;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #080b10;
-      box-shadow: 0 4px 20px rgba(0,245,196,0.3);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 30px rgba(0,245,196,0.5);
-    }
-    .btn-primary:active { transform: translateY(0); }
+    .btn-c1 { background: var(--c1); color: #fff; box-shadow: 0 2px 8px rgba(79,126,248,0.25); }
+    .btn-c1:hover { background: #3d6ce6; transform: translateY(-1px); }
+
+    .btn-c2 { background: var(--c2); color: #fff; box-shadow: 0 2px 8px rgba(232,160,32,0.25); }
+    .btn-c2:hover { background: #d08e10; transform: translateY(-1px); }
+
+    .btn-c3 { background: var(--c3); color: #fff; box-shadow: 0 2px 8px rgba(224,90,58,0.25); }
+    .btn-c3:hover { background: #c94a2a; transform: translateY(-1px); }
+
+    .btn-c4 { background: var(--c4); color: #fff; box-shadow: 0 2px 8px rgba(155,111,232,0.25); }
+    .btn-c4:hover { background: #8a5cd4; transform: translateY(-1px); }
+
+    .btn-c5 { background: var(--c5); color: #fff; box-shadow: 0 2px 8px rgba(44,170,126,0.25); }
+    .btn-c5:hover { background: #249a70; transform: translateY(-1px); }
+
+    .btn-c6 { background: var(--c6); color: #fff; box-shadow: 0 2px 8px rgba(232,80,122,0.25); }
+    .btn-c6:hover { background: #d03868; transform: translateY(-1px); }
+
+    .btn:active { transform: translateY(0); }
 
     .btn-ghost {
-      background: var(--surface2);
+      background: var(--faint);
       color: var(--muted);
       border: 1px solid var(--border);
     }
-    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+    .btn-ghost:hover { color: var(--text); background: #e8eaee; }
 
-    /* Results */
+    /* ── Result box ── */
     .result-box {
-      background: var(--surface2);
+      background: var(--faint);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      min-height: 80px;
+      border-radius: 8px;
+      padding: 22px;
+      min-height: 76px;
       display: flex; align-items: center; justify-content: center;
-      flex-wrap: wrap; gap: 12px;
-      transition: all 0.3s;
+      flex-wrap: wrap; gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .result-placeholder {
+      color: var(--muted); font-size: 0.82rem;
+      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;
     }
 
     .result-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 4rem;
-      color: var(--accent);
-      text-shadow: 0 0 30px rgba(0,245,196,0.4);
-      animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
-      line-height: 1;
-    }
-
-    .result-number.red { color: var(--accent2); text-shadow: 0 0 30px rgba(255,95,87,0.4); }
-    .result-number.yellow { color: var(--accent3); text-shadow: 0 0 30px rgba(255,209,102,0.4); }
-
-    @keyframes popIn {
-      from { transform: scale(0.5); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      font-family: 'DM Mono', monospace;
+      font-size: 3.8rem; font-weight: 500;
+      color: var(--c1); line-height: 1;
+      animation: popIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
     }
 
     .result-tag {
-      background: rgba(0,245,196,0.1);
-      border: 1px solid rgba(0,245,196,0.25);
-      color: var(--accent);
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--c1);
       font-family: 'DM Mono', monospace;
-      font-size: 1.2rem; font-weight: 700;
-      padding: 10px 18px; border-radius: 8px;
-      animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      font-size: 1.15rem; font-weight: 500;
+      padding: 8px 16px; border-radius: var(--radius);
+      animation: popIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: var(--shadow);
     }
 
-    .result-tag.red { background: rgba(255,95,87,0.1); border-color: rgba(255,95,87,0.25); color: var(--accent2); }
-
-    /* Dice */
-    .dice-display {
-      display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    @keyframes popIn {
+      from { transform: scale(0.6); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
     }
 
+    .history {
+      margin-top: 10px; font-size: 0.75rem; color: var(--muted);
+    }
+    .history span {
+      font-family: 'DM Mono', monospace;
+      color: var(--c1); font-size: 0.78rem;
+    }
+    .lucky-hist { color: #e8903a !important; }
+    .hist-stars { color: #9b6fe8 !important; font-weight: 600; }
+
+    /* ── Lottery ── */
+    .lotto-row {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      justify-content: center; align-items: center;
+    }
+    .lotto-sep {
+      font-size: 1.4rem; color: var(--muted); padding: 0 2px; line-height: 1;
+    }
+    .lotto-lucky-label {
+      width: 100%; text-align: right;
+      font-size: 0.62rem; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--muted); margin-top: 4px;
+    }
+    .lotto-ball {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-weight: 700; font-size: 0.95rem;
+      color: white; flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      animation: popIn 0.28s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .lotto-row .lotto-ball:nth-child(1) { animation-delay:0.00s; background: #4f7ef8; }
+    .lotto-row .lotto-ball:nth-child(2) { animation-delay:0.07s; background: #5b8ff5; }
+    .lotto-row .lotto-ball:nth-child(3) { animation-delay:0.14s; background: #6a9ef2; }
+    .lotto-row .lotto-ball:nth-child(4) { animation-delay:0.21s; background: #7aadee; }
+    .lotto-row .lotto-ball:nth-child(5) { animation-delay:0.28s; background: #8abceb; }
+    .lotto-row .lotto-ball:nth-child(6) { animation-delay:0.35s; background: #9bcbe8; }
+    .lotto-ball.estrela {
+      background: #9b6fe8;
+      border: 2px solid #c4a8f5;
+      width: 44px; height: 44px; font-size: 0.88rem;
+      animation-delay: 0.42s;
+    }
+    .lotto-row .lotto-ball.estrela:last-child { animation-delay: 0.49s; }
+    .lotto-ball.lucky {
+      width: 56px; height: 56px; font-size: 1.1rem;
+      background: #e8903a;
+      border: 2px solid #f5c080;
+      animation-delay: 0.42s;
+      box-shadow: 0 2px 12px rgba(232,144,58,0.35);
+    }
+
+    /* ── Dice ── */
+    .dice-display { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
     .die {
-      width: 70px; height: 70px;
-      background: white;
-      border-radius: 12px;
+      width: 64px; height: 64px;
+      background: white; border-radius: 10px;
       display: grid; grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
-      padding: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      animation: rollDie 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      padding: 9px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+      border: 1px solid #ddd;
+      animation: rollDie 0.35s cubic-bezier(0.34,1.56,0.64,1);
     }
-
     @keyframes rollDie {
-      from { transform: rotate(-180deg) scale(0); opacity: 0; }
-      to { transform: rotate(0deg) scale(1); opacity: 1; }
+      from { transform: rotate(-90deg) scale(0.5); opacity: 0; }
+      to   { transform: rotate(0deg) scale(1); opacity: 1; }
     }
-
     .dot {
-      width: 10px; height: 10px;
-      background: #1a1a2e;
+      width: 8px; height: 8px;
+      background: var(--c3);
       border-radius: 50%;
       justify-self: center; align-self: center;
     }
 
-    /* Coin */
+    /* ── Coin ── */
     .coin {
-      width: 100px; height: 100px; border-radius: 50%;
+      width: 90px; height: 90px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-      box-shadow: 0 4px 20px rgba(255,209,102,0.3);
-      animation: flipCoin 0.5s cubic-bezier(0.34,1.56,0.64,1);
+      font-size: 2.4rem;
+      animation: flipCoin 1.2s ease-in-out;
     }
-
-    .coin.heads { background: linear-gradient(135deg, #ffd166, #f4a261); }
-    .coin.tails { background: linear-gradient(135deg, #adb5bd, #6c757d); }
-
+    .coin.heads { background: linear-gradient(135deg, #ffd166, #f4a261); box-shadow: 0 4px 16px rgba(255,180,50,0.35); }
+    .coin.tails { background: linear-gradient(135deg, #cbd5e1, #94a3b8); box-shadow: 0 4px 16px rgba(148,163,184,0.35); }
     @keyframes flipCoin {
-      0% { transform: rotateY(0deg); }
-      50% { transform: rotateY(900deg) scale(0.5); }
-      100% { transform: rotateY(1800deg) scale(1); }
+      0%   { transform: scaleX(1); }
+      25%  { transform: scaleX(0); }
+      50%  { transform: scaleX(1); }
+      75%  { transform: scaleX(0); }
+      100% { transform: scaleX(1); }
+    }
+    .coin-label {
+      opacity: 0;
+      animation: fadeInLabel 0.35s ease forwards;
+      animation-delay: 1.2s;
+    }
+    @keyframes fadeInLabel {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Lottery balls */
-    /* Lottery layout */
-    .lotto-row {
-      display: flex; gap: 10px; flex-wrap: wrap;
-      justify-content: center; align-items: center;
-    }
-
-    .lotto-sep {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem; color: var(--muted);
-      padding: 0 2px; line-height: 1; flex-shrink: 0;
-    }
-
-    .lotto-lucky-label {
-      width: 100%; text-align: right;
-      font-size: 0.65rem; text-transform: uppercase;
-      letter-spacing: 2px; color: var(--muted);
-      margin-top: 4px; padding-right: 2px;
-    }
-
-    .lucky-hist { color: #ff9f43 !important; }
-    .hist-stars { color: #c4b5fd !important; font-weight: 700; }
-
-    .lotto-ball {
-      width: 54px; height: 54px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'DM Mono', monospace;
-      font-weight: 700; font-size: 1.05rem;
-      color: white; flex-shrink: 0;
-      box-shadow: inset 0 -4px 8px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.4);
-      animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
-    }
-
-    .lotto-row .lotto-ball:nth-child(1) { animation-delay: 0.0s; background: radial-gradient(circle at 35% 35%, #ff6b6b, #c0392b); }
-    .lotto-row .lotto-ball:nth-child(2) { animation-delay: 0.1s; background: radial-gradient(circle at 35% 35%, #feca57, #e67e22); }
-    .lotto-row .lotto-ball:nth-child(3) { animation-delay: 0.2s; background: radial-gradient(circle at 35% 35%, #48dbfb, #2980b9); }
-    .lotto-row .lotto-ball:nth-child(4) { animation-delay: 0.3s; background: radial-gradient(circle at 35% 35%, #ff9ff3, #8e44ad); }
-    .lotto-row .lotto-ball:nth-child(5) { animation-delay: 0.4s; background: radial-gradient(circle at 35% 35%, #00d2d3, #1abc9c); }
-    .lotto-row .lotto-ball:nth-child(6) { animation-delay: 0.5s; background: radial-gradient(circle at 35% 35%, #ff9f43, #e74c3c); }
-
-    .lotto-ball.estrela {
-      animation-delay: 0.6s;
-      background: radial-gradient(circle at 30% 30%, #a78bfa, #6d28d9);
-      border: 3px solid #c4b5fd;
-      box-shadow: inset 0 -4px 8px rgba(0,0,0,0.3), 0 0 18px rgba(167,139,250,0.55);
-      width: 54px; height: 54px; font-size: 1rem;
-    }
-    .lotto-row .lotto-ball.estrela:last-child  { animation-delay: 0.7s; }
-
-    .lotto-ball.lucky {
-      width: 64px; height: 64px; font-size: 1.3rem;
-      animation-delay: 0.7s;
-      background: radial-gradient(circle at 35% 35%, #ff9f43, #cc6600);
-      border: 3px solid #ff9f43;
-      box-shadow: inset 0 -4px 8px rgba(0,0,0,0.3), 0 0 22px rgba(255,159,67,0.55);
-    }
-
-    /* Password */
+    /* ── Password ── */
     .pass-output {
       font-family: 'DM Mono', monospace;
-      font-size: 1.3rem;
-      color: var(--accent);
-      word-break: break-all;
-      text-align: center;
-      animation: popIn 0.3s ease;
+      font-size: 1.1rem; color: var(--c5);
+      word-break: break-all; text-align: center;
+      animation: popIn 0.25s ease;
+    }
+    input[type="range"] {
+      -webkit-appearance: none; width: 100%;
+      height: 4px; background: var(--border);
+      border-radius: 2px; outline: none; margin-top: 8px;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--c5); cursor: pointer;
+      box-shadow: 0 0 6px rgba(44,170,126,0.4);
     }
 
-    /* History */
-    .history {
-      margin-top: 12px;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .history span { font-family: 'DM Mono', monospace; color: rgba(0,245,196,0.5); }
-
-    /* Copy button */
+    /* ── Copy button ── */
     .copy-btn {
       display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
+      background: var(--faint); border: 1px solid var(--border);
       color: var(--muted); font-size: 0.75rem;
-      padding: 6px 14px; border-radius: 6px; cursor: pointer;
-      font-family: 'Outfit', sans-serif;
-      transition: all 0.2s; margin-top: 12px;
+      padding: 6px 14px; border-radius: var(--radius); cursor: pointer;
+      font-family: 'Inter', sans-serif; transition: all 0.15s; margin-top: 10px;
     }
-    .copy-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+    .copy-btn:hover { color: var(--text); border-color: #ccc; }
 
-    /* Section divider ad */
+    /* ── Inline ads ── */
     .ad-inline {
-      position: relative; z-index: 1;
-      background: rgba(255,255,255,0.02);
-      border: 1px dashed rgba(255,255,255,0.08);
-      border-radius: 8px;
-      height: 100px;
+      background: var(--white);
+      border: 1px dashed var(--border);
+      border-radius: 8px; height: 90px;
       display: flex; align-items: center; justify-content: center;
       color: var(--muted); font-size: 0.7rem;
-      letter-spacing: 2px; text-transform: uppercase;
-      margin: 4px 0;
+      letter-spacing: 1px; text-transform: uppercase;
+      position: relative;
     }
     .ad-inline::before {
-      content: 'Publicidade';
-      position: absolute; top: -10px; left: 16px;
-      background: var(--bg); padding: 0 8px;
+      content: 'Publicidade'; position: absolute;
+      top: -9px; left: 14px;
+      background: var(--bg); padding: 0 6px;
       font-size: 0.6rem; color: var(--muted);
     }
 
-    /* Tip card in sidebar */
-    .tip-card {
-      background: var(--surface);
+    /* ── Sidebar ── */
+    .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+    .ad-sidebar {
+      background: var(--white); border: 1px dashed var(--border);
+      border-radius: 8px; height: 250px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 0.7rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      position: relative;
+    }
+    .ad-sidebar::before {
+      content: 'Publicidade'; position: absolute;
+      top: -9px; left: 14px;
+      background: var(--bg); padding: 0 6px;
+      font-size: 0.6rem; color: var(--muted);
+    }
+
+    .info-card {
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: var(--card-radius);
       padding: 20px;
     }
-
-    .tip-card h3 { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
-
-    .tip-item {
+    .info-card h3 {
+      font-size: 0.72rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px;
+    }
+    .info-item {
       display: flex; gap: 10px; align-items: flex-start;
-      margin-bottom: 12px; font-size: 0.82rem; color: var(--muted);
+      margin-bottom: 10px; font-size: 0.82rem; color: var(--muted);
     }
-    .tip-item .dot2 {
-      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
-      flex-shrink: 0; margin-top: 6px;
+    .info-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--c1); flex-shrink: 0; margin-top: 7px;
     }
 
-    /* Footer */
+    /* ── Rich content ── */
+    .rich-section {
+      max-width: 1080px; margin: 0 auto; padding: 0 24px 60px;
+    }
+    .rich-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 36px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+    .rich-card h2 {
+      font-size: 1.25rem; font-weight: 700; color: var(--text);
+      margin-bottom: 16px;
+    }
+    .rich-card h2 span { color: var(--c1); }
+    .rich-card p { color: #5a6072; font-size: 0.9rem; line-height: 1.75; margin-bottom: 12px; }
+    .rich-card p:last-child { margin-bottom: 0; }
+
+    .tools-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap: 16px; margin-bottom: 20px;
+    }
+    .tool-info-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--card-radius); padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .tool-info-card .icon { font-size: 1.6rem; margin-bottom: 10px; }
+    .tool-info-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .tool-info-card p { color: #5a6072; font-size: 0.83rem; line-height: 1.65; }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 22px 0;
+    }
+    .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .faq-item h3 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .faq-item p { color: #5a6072; font-size: 0.87rem; line-height: 1.7; }
+
+    /* ── Footer ── */
     footer {
-      position: relative; z-index: 1;
+      background: var(--white);
       border-top: 1px solid var(--border);
-      padding: 32px 40px;
+      padding: 24px 40px;
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 16px;
     }
-
-    footer .logo { font-size: 1.2rem; }
-    footer p { font-size: 0.8rem; color: var(--muted); }
-
+    footer p { font-size: 0.78rem; color: var(--muted); }
     .footer-links { display: flex; gap: 20px; }
-    .footer-links a { color: var(--muted); font-size: 0.8rem; text-decoration: none; }
+    .footer-links a { color: var(--muted); font-size: 0.78rem; text-decoration: none; }
     .footer-links a:hover { color: var(--text); }
 
-    /* Placeholder */
-    .result-placeholder {
-      color: var(--muted); font-size: 0.9rem; letter-spacing: 1px;
-      text-transform: uppercase; font-weight: 600;
-    }
-
-    /* Range slider */
-    input[type="range"] {
-      -webkit-appearance: none;
-      width: 100%; height: 4px;
-      background: var(--surface2);
-      border-radius: 2px; outline: none;
-      margin-top: 8px;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 18px; height: 18px; border-radius: 50%;
-      background: var(--accent); cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,245,196,0.4);
-    }
-
-    /* Responsive */
+    /* ── Responsive ── */
     @media (max-width: 768px) {
-      header { padding: 16px 20px; }
+      header { padding: 0 16px; }
       nav { display: none; }
-      .container { grid-template-columns: 1fr; }
+      .hero { padding: 36px 20px 30px; }
+      .container { grid-template-columns: 1fr; padding: 0 16px; }
       .sidebar { display: none; }
-      .tool-card { padding: 20px; }
-      .ad-banner { max-width: 100%; height: 70px; margin: 0 20px 32px; }
+      .ad-wrap { padding: 20px 16px 0; }
+      .rich-section { padding: 0 16px 40px; }
+      footer { padding: 20px 16px; flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -545,278 +549,318 @@
 
 <!-- HEADER -->
 <header>
-  <div class="logo">sorteador<span>.io</span></div>
+  <div class="logo">números<span>sortear</span></div>
   <nav>
     <a href="#numeros">Números</a>
-    <a href="#dados">Dados</a>
     <a href="#lotaria">Lotaria</a>
+    <a href="#dados">Dados</a>
     <a href="#moeda">Moeda</a>
     <a href="#senha">Senha</a>
+    <a href="#escolha">Escolha</a>
   </nav>
 </header>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">⚡ Ferramentas gratuitas de aleatoriedade</div>
-  <h1>
-    <span class="line1">GERA</span>
-    <span class="line2">QUALQUER COISA</span>
-  </h1>
-  <p>Números aleatórios, dados, lotaria, moedas e senhas — tudo instantâneo, grátis e sem registo.</p>
+  <div class="hero-pill">⚡ Ferramentas gratuitas de aleatoriedade</div>
+  <h1>Gera <span>números aleatórios</span><br>instantaneamente</h1>
+  <p>Euromilhões, Totoloto, dados, moeda, senhas e sorteios — tudo grátis, sem registo.</p>
 </div>
 
 <!-- AD BANNER TOP -->
-<div style="position:relative;z-index:1;display:flex;justify-content:center;padding:0 20px;">
-  <div class="ad-banner">
-    <!-- Google AdSense / Outro provider aqui -->
-    728 × 90 — Banner principal
-  </div>
+<div class="ad-wrap">
+  <div class="ad-banner">728 × 90 — Banner principal</div>
 </div>
 
-<!-- MAIN LAYOUT -->
+<!-- MAIN -->
 <div class="container">
-
-  <!-- TOOLS COLUMN -->
   <div class="tools">
 
     <!-- ① NÚMERO ALEATÓRIO -->
-    <div class="tool-card active-tool" id="numeros">
-      <div class="tool-header">
-        <div class="tool-icon">🎲</div>
+    <div class="card" id="numeros">
+      <div class="card-header">
+        <div class="card-icon c1">🎲</div>
         <div>
-          <div class="tool-title">Número Aleatório</div>
-          <div class="tool-desc">Gera um número entre mínimo e máximo</div>
+          <div class="card-title">Número Aleatório</div>
+          <div class="card-desc">Gera um ou vários números entre um intervalo</div>
         </div>
       </div>
-      <div class="controls">
-        <div class="field">
-          <label>Mínimo</label>
-          <input type="number" id="numMin" value="1"/>
+      <div class="divider" style="margin-top:18px;"></div>
+      <div class="card-body">
+        <div class="controls">
+          <div class="field">
+            <label>Mínimo</label>
+            <input type="number" id="numMin" value="1"/>
+          </div>
+          <div class="field">
+            <label>Máximo</label>
+            <input type="number" id="numMax" value="100"/>
+          </div>
+          <div class="field">
+            <label>Quantidade</label>
+            <input type="number" id="numQty" value="1" min="1" max="20"/>
+          </div>
+          <label class="checkbox-label">
+            <input type="checkbox" id="numUnique"/> Únicos
+          </label>
+          <button class="btn btn-c1" onclick="gerarNumero()">Sortear</button>
         </div>
-        <div class="field">
-          <label>Máximo</label>
-          <input type="number" id="numMax" value="100"/>
+        <div class="result-box" id="numResult">
+          <span class="result-placeholder">Clica para sortear</span>
         </div>
-        <div class="field">
-          <label>Quantidade</label>
-          <input type="number" id="numQty" value="1" min="1" max="20"/>
-        </div>
-        <label class="checkbox-label">
-          <input type="checkbox" id="numUnique"/> Únicos
-        </label>
-        <button class="btn btn-primary" onclick="gerarNumero()">⚡ Sortear</button>
+        <div class="history" id="numHistory"></div>
       </div>
-      <div class="result-box" id="numResult">
-        <span class="result-placeholder">Clica para sortear</span>
-      </div>
-      <div class="history" id="numHistory"></div>
     </div>
 
-    <!-- INLINE AD -->
-    <div class="ad-inline">
-      <!-- AdSense unidade inline -->
-      468 × 60 — Publicidade inline
-    </div>
+    <!-- AD INLINE -->
+    <div class="ad-inline">468 × 60 — Publicidade</div>
 
     <!-- ② LOTARIA -->
-    <div class="tool-card" id="lotaria">
-      <div class="tool-header">
-        <div class="tool-icon yellow">🏆</div>
+    <div class="card" id="lotaria">
+      <div class="card-header">
+        <div class="card-icon c2">🏆</div>
         <div>
-          <div class="tool-title">Chave de Lotaria</div>
-          <div class="tool-desc">Euromilhões, Totoloto, Lotaria Nacional</div>
+          <div class="card-title">Chave de Lotaria</div>
+          <div class="card-desc">Euromilhões, Totoloto e personalizado</div>
         </div>
       </div>
-      <div class="controls">
-        <div class="field">
-          <label>Modo</label>
-          <select id="lottoMode" onchange="atualizarModo()">
-            <option value="euro">Euromilhões</option>
-            <option value="toto">Totoloto</option>
-            <option value="5x50">5 de 50</option>
-            <option value="custom">Personalizado</option>
-          </select>
+      <div class="divider" style="margin-top:18px;"></div>
+      <div class="card-body">
+        <div class="controls">
+          <div class="field">
+            <label>Modo</label>
+            <select id="lottoMode" onchange="atualizarModo()">
+              <option value="euro">Euromilhões</option>
+              <option value="toto">Totoloto</option>
+              <option value="5x50">5 de 50</option>
+              <option value="custom">Personalizado</option>
+            </select>
+          </div>
+          <div class="field" id="customFields" style="display:none">
+            <label>Bolas</label>
+            <input type="number" id="lottoBalls" value="49" style="width:80px"/>
+          </div>
+          <div class="field" id="customFields2" style="display:none">
+            <label>Escolher</label>
+            <input type="number" id="lottoPick" value="6" style="width:80px"/>
+          </div>
+          <button class="btn btn-c2" onclick="gerarLotaria()">Gerar Chave</button>
         </div>
-        <div class="field" id="customFields" style="display:none">
-          <label>Bolas (de)</label>
-          <input type="number" id="lottoBalls" value="49" style="width:80px"/>
+        <div class="result-box" id="lottoResult">
+          <span class="result-placeholder">Clica para gerar chave</span>
         </div>
-        <div class="field" id="customFields2" style="display:none">
-          <label>Escolher</label>
-          <input type="number" id="lottoPick" value="6" style="width:80px"/>
-        </div>
-        <button class="btn btn-primary" onclick="gerarLotaria()">🎰 Gerar Chave</button>
+        <div class="history" id="lottoHistory"></div>
       </div>
-      <div class="result-box" id="lottoResult">
-        <span class="result-placeholder">Clica para gerar chave</span>
-      </div>
-      <div class="history" id="lottoHistory"></div>
     </div>
 
     <!-- ③ DADOS -->
-    <div class="tool-card" id="dados">
-      <div class="tool-header">
-        <div class="tool-icon red">🎯</div>
+    <div class="card" id="dados">
+      <div class="card-header">
+        <div class="card-icon c3">🎯</div>
         <div>
-          <div class="tool-title">Lançar Dados</div>
-          <div class="tool-desc">D4, D6, D8, D10, D12, D20 e mais</div>
+          <div class="card-title">Lançar Dados</div>
+          <div class="card-desc">D4, D6, D8, D10, D12, D20 e D100</div>
         </div>
       </div>
-      <div class="controls">
-        <div class="field">
-          <label>Tipo de Dado</label>
-          <select id="diceType">
-            <option value="6">D6 — Dado clássico</option>
-            <option value="4">D4</option>
-            <option value="8">D8</option>
-            <option value="10">D10</option>
-            <option value="12">D12</option>
-            <option value="20">D20</option>
-            <option value="100">D100</option>
-          </select>
+      <div class="divider" style="margin-top:18px;"></div>
+      <div class="card-body">
+        <div class="controls">
+          <div class="field">
+            <label>Tipo de Dado</label>
+            <select id="diceType">
+              <option value="6">D6 — Clássico</option>
+              <option value="4">D4</option>
+              <option value="8">D8</option>
+              <option value="10">D10</option>
+              <option value="12">D12</option>
+              <option value="20">D20</option>
+              <option value="100">D100</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Quantidade</label>
+            <input type="number" id="diceQty" value="2" min="1" max="6" style="width:80px"/>
+          </div>
+          <button class="btn btn-c3" onclick="lancarDados()">Lançar</button>
         </div>
-        <div class="field">
-          <label>Quantidade</label>
-          <input type="number" id="diceQty" value="2" min="1" max="6" style="width:80px"/>
+        <div class="result-box" id="diceResult">
+          <span class="result-placeholder">Lança os dados!</span>
         </div>
-        <button class="btn btn-primary" onclick="lancarDados()">🎲 Lançar</button>
+        <div style="margin-top:10px;font-size:0.8rem;color:var(--muted)" id="diceTotal"></div>
       </div>
-      <div class="result-box" id="diceResult">
-        <span class="result-placeholder">Lança os dados!</span>
-      </div>
-      <div style="margin-top:12px; font-size:0.8rem; color:var(--muted);" id="diceTotal"></div>
     </div>
 
     <!-- ④ MOEDA -->
-    <div class="tool-card" id="moeda">
-      <div class="tool-header">
-        <div class="tool-icon yellow">🪙</div>
+    <div class="card" id="moeda">
+      <div class="card-header">
+        <div class="card-icon c4">🪙</div>
         <div>
-          <div class="tool-title">Lançar Moeda</div>
-          <div class="tool-desc">Cara ou coroa — 50/50</div>
+          <div class="card-title">Lançar Moeda</div>
+          <div class="card-desc">Cara ou coroa — probabilidade 50/50</div>
         </div>
       </div>
-      <div class="controls">
-        <div class="field">
-          <label>Lançamentos</label>
-          <input type="number" id="coinQty" value="1" min="1" max="100"/>
+      <div class="divider" style="margin-top:18px;"></div>
+      <div class="card-body">
+        <div class="controls">
+          <div class="field">
+            <label>Lançamentos</label>
+            <input type="number" id="coinQty" value="1" min="1" max="100"/>
+          </div>
+          <button class="btn btn-c4" onclick="lancarMoeda()">Lançar</button>
         </div>
-        <button class="btn btn-primary" onclick="lancarMoeda()">🪙 Lançar</button>
+        <div class="result-box" id="coinResult">
+          <span class="result-placeholder">Lança a moeda!</span>
+        </div>
+        <div style="margin-top:10px;font-size:0.78rem;color:var(--muted)" id="coinStats"></div>
       </div>
-      <div class="result-box" id="coinResult">
-        <span class="result-placeholder">Lança a moeda!</span>
-      </div>
-      <div style="margin-top:12px;font-size:0.8rem;color:var(--muted)" id="coinStats"></div>
     </div>
 
-    <!-- INLINE AD 2 -->
-    <div class="ad-inline">
-      <!-- AdSense -->
-      468 × 60 — Publicidade inline
+    <!-- AD INLINE 2 -->
+    <div class="ad-inline">468 × 60 — Publicidade</div>
+
+    <!-- ⑤ SENHA -->
+    <div class="card" id="senha">
+      <div class="card-header">
+        <div class="card-icon c5">🔐</div>
+        <div>
+          <div class="card-title">Gerador de Senha</div>
+          <div class="card-desc">Senha segura e aleatória</div>
+        </div>
+      </div>
+      <div class="divider" style="margin-top:18px;"></div>
+      <div class="card-body">
+        <div class="controls" style="flex-direction:column;align-items:flex-start;gap:12px;">
+          <div class="field" style="width:100%;max-width:400px">
+            <label>Comprimento: <span id="passLenLabel">16</span> caracteres</label>
+            <input type="range" id="passLen" min="6" max="64" value="16"
+              oninput="document.getElementById('passLenLabel').textContent=this.value"/>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;">
+            <label class="checkbox-label"><input type="checkbox" id="passUpper" checked/> Maiúsculas (A-Z)</label>
+            <label class="checkbox-label"><input type="checkbox" id="passLower" checked/> Minúsculas (a-z)</label>
+            <label class="checkbox-label"><input type="checkbox" id="passNum" checked/> Números (0-9)</label>
+            <label class="checkbox-label"><input type="checkbox" id="passSym" checked/> Símbolos</label>
+          </div>
+          <button class="btn btn-c5" onclick="gerarSenha()">Gerar Senha</button>
+        </div>
+        <div class="result-box" id="passResult">
+          <span class="result-placeholder">Clica para gerar</span>
+        </div>
+        <button class="copy-btn" id="copyBtn" onclick="copiarSenha()" style="display:none">📋 Copiar senha</button>
+      </div>
     </div>
 
-    <!-- ⑤ SENHA ALEATÓRIA -->
-    <div class="tool-card" id="senha">
-      <div class="tool-header">
-        <div class="tool-icon purple">🔐</div>
+    <!-- ⑥ ESCOLHA -->
+    <div class="card" id="escolha">
+      <div class="card-header">
+        <div class="card-icon c6">🔀</div>
         <div>
-          <div class="tool-title">Gerador de Senha</div>
-          <div class="tool-desc">Senha segura e aleatória</div>
+          <div class="card-title">Escolha Aleatória</div>
+          <div class="card-desc">Deixa o acaso decidir por ti</div>
         </div>
       </div>
-      <div class="controls">
-        <div class="field" style="flex:1;min-width:200px">
-          <label>Comprimento: <span id="passLenLabel">16</span></label>
-          <input type="range" id="passLen" min="6" max="64" value="16" oninput="document.getElementById('passLenLabel').textContent=this.value"/>
-        </div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:20px;">
-        <label class="checkbox-label"><input type="checkbox" id="passUpper" checked/> Maiúsculas (A-Z)</label>
-        <label class="checkbox-label"><input type="checkbox" id="passLower" checked/> Minúsculas (a-z)</label>
-        <label class="checkbox-label"><input type="checkbox" id="passNum" checked/> Números (0-9)</label>
-        <label class="checkbox-label"><input type="checkbox" id="passSym" checked/> Símbolos (!@#$)</label>
-      </div>
-      <button class="btn btn-primary" onclick="gerarSenha()">🔐 Gerar Senha</button>
-      <div class="result-box" id="passResult" style="margin-top:20px">
-        <span class="result-placeholder">Clica para gerar</span>
-      </div>
-      <button class="copy-btn" id="copyBtn" onclick="copiarSenha()" style="display:none">📋 Copiar senha</button>
-    </div>
-
-    <!-- ⑥ ESCOLHA ALEATÓRIA -->
-    <div class="tool-card" id="escolha">
-      <div class="tool-header">
-        <div class="tool-icon blue">🔀</div>
-        <div>
-          <div class="tool-title">Escolha Aleatória</div>
-          <div class="tool-desc">Sorteia entre várias opções</div>
-        </div>
-      </div>
-      <div class="controls" style="flex-direction:column;align-items:flex-start">
-        <div class="field" style="width:100%">
-          <label>Opções (uma por linha)</label>
-          <textarea id="choiceInput" rows="4" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;color:var(--text);font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;resize:vertical">Pizza
+      <div class="divider" style="margin-top:18px;"></div>
+      <div class="card-body">
+        <div class="controls" style="flex-direction:column;align-items:flex-start;gap:12px;">
+          <div class="field" style="width:100%">
+            <label>Opções (uma por linha)</label>
+            <textarea id="choiceInput" rows="5" style="width:100%;background:var(--faint);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;color:var(--text);font-family:'Inter',sans-serif;font-size:0.88rem;outline:none;resize:vertical;line-height:1.6">Pizza
 Sushi
 Hambúrguer
 Tacos
-Massa</textarea>
+Massa
+Francesinha</textarea>
+          </div>
+          <button class="btn btn-c6" onclick="escolhaAleatoria()">Sortear opção</button>
         </div>
-        <button class="btn btn-primary" onclick="escolhaAleatoria()">🔀 Sortear opção</button>
-      </div>
-      <div class="result-box" id="choiceResult" style="margin-top:20px">
-        <span class="result-placeholder">Insere as opções e sorteia!</span>
+        <div class="result-box" id="choiceResult" style="margin-top:16px">
+          <span class="result-placeholder">Insere as opções e sorteia!</span>
+        </div>
       </div>
     </div>
 
-  </div>
+  </div><!-- /tools -->
 
   <!-- SIDEBAR -->
   <div class="sidebar">
+    <div class="ad-sidebar">300 × 250 — Sidebar</div>
 
-    <div class="ad-sidebar">
-      <!-- AdSense 300×250 -->
-      300 × 250 — Sidebar ad
+    <div class="info-card">
+      <h3>Como usar</h3>
+      <div class="info-item"><div class="info-dot"></div><span>Define o intervalo e clica Sortear para números aleatórios.</span></div>
+      <div class="info-item"><div class="info-dot"></div><span>Ativa "Únicos" para sorteios sem repetição.</span></div>
+      <div class="info-item"><div class="info-dot"></div><span>Euromilhões gera 5 números + 2 estrelas.</span></div>
+      <div class="info-item"><div class="info-dot"></div><span>Totoloto gera 5 números + Nº da Sorte.</span></div>
+      <div class="info-item"><div class="info-dot" style="background:var(--c5)"></div><span>Senha usa criptografia real do browser.</span></div>
     </div>
 
-    <div class="tip-card">
-      <h3>💡 Como usar</h3>
-      <div class="tip-item"><div class="dot2"></div><span>Define o intervalo e clica em Sortear para gerar números aleatórios.</span></div>
-      <div class="tip-item"><div class="dot2"></div><span>Ativa "Únicos" para garantir que não se repetem.</span></div>
-      <div class="tip-item"><div class="dot2"></div><span>Escolhe Euromilhões para gerar uma chave completa com estrelas.</span></div>
-      <div class="tip-item"><div class="dot2"></div><span>O gerador de senha usa criptografia real do browser.</span></div>
-    </div>
+    <div class="ad-sidebar">300 × 250 — Sidebar</div>
 
-    <div class="ad-sidebar">
-      <!-- AdSense 300×250 -->
-      300 × 250 — Sidebar ad
+    <div class="info-card">
+      <h3>Sessão atual</h3>
+      <div class="info-item"><div class="info-dot"></div><span id="statCount">0 sorteios</span> realizados</div>
+      <div class="info-item"><div class="info-dot"></div><span>Usa <code style="font-size:0.75rem;color:var(--c1)">crypto.getRandomValues</code> — aleatoriedade real.</span></div>
     </div>
+  </div>
+</div><!-- /container -->
 
-    <div class="tip-card">
-      <h3>📊 Estatísticas</h3>
-      <div class="tip-item"><div class="dot2"></div><span id="statCount">0 sorteios</span> realizados nesta sessão</div>
-      <div class="tip-item"><div class="dot2"></div><span>Aleatoriedade baseada em <code style="color:var(--accent);font-size:0.8rem">crypto.getRandomValues</code></span></div>
+<!-- RICH CONTENT -->
+<div class="rich-section">
+
+  <div class="rich-card">
+    <h2>O que é o <span>NúmerosSortear</span>?</h2>
+    <p>O <strong>NúmerosSortear.com</strong> é um gerador de números aleatórios gratuito, desenvolvido para utilizadores portugueses. Utilizamos a API <code style="color:var(--c1)">crypto.getRandomValues</code> do browser — o mesmo padrão criptográfico usado em segurança bancária — para garantir aleatoriedade verdadeira em cada sorteio.</p>
+    <p>Todas as operações são realizadas diretamente no teu browser, sem enviar dados para qualquer servidor. O site não guarda os números gerados, não requer registo e é completamente gratuito.</p>
+  </div>
+
+  <div class="tools-grid">
+    <div class="tool-info-card"><div class="icon">🎲</div><h3>Números Aleatórios</h3><p>Define intervalo e quantidade. Ideal para sorteios, rifas e seleção de participantes. Ativa "Únicos" para garantir que nenhum número se repete.</p></div>
+    <div class="tool-info-card"><div class="icon">🏆</div><h3>Chave de Lotaria</h3><p>Gera chaves para Euromilhões (5+2) e Totoloto (5+Nº Sorte), seguindo exatamente as regras oficiais dos jogos.</p></div>
+    <div class="tool-info-card"><div class="icon">🎯</div><h3>Dados Virtuais</h3><p>D4 ao D100, até 6 dados em simultâneo com total calculado. Perfeito para D&D, Pathfinder e outros jogos de tabuleiro.</p></div>
+    <div class="tool-info-card"><div class="icon">🪙</div><h3>Cara ou Coroa</h3><p>50/50 real. Lança uma moeda para decidir ou até 100 de uma vez para análise estatística.</p></div>
+    <div class="tool-info-card"><div class="icon">🔐</div><h3>Senha Segura</h3><p>Gera senhas com entropia criptográfica real. Define comprimento, maiúsculas, números e símbolos.</p></div>
+    <div class="tool-info-card"><div class="icon">🔀</div><h3>Sorteio de Opções</h3><p>Escreve qualquer lista — restaurantes, destinos, tarefas — e deixa o acaso escolher por ti.</p></div>
+  </div>
+
+  <div class="rich-card">
+    <h2>Perguntas Frequentes</h2>
+    <div class="faq-item">
+      <h3>Os números são verdadeiramente aleatórios?</h3>
+      <p>Sim. Usamos <code style="color:var(--c1)">crypto.getRandomValues()</code>, uma fonte de entropia criptograficamente segura fornecida pelo browser — diferente do <code style="color:var(--c1)">Math.random()</code> que é previsível. É o mesmo nível de segurança usado em banca online.</p>
     </div>
-
+    <div class="faq-item">
+      <h3>Posso usar as chaves geradas no Euromilhões ou Totoloto?</h3>
+      <p>Sim. As chaves seguem as regras oficiais de cada jogo. Podes usá-las diretamente nas apostas online ou em qualquer ponto de venda autorizado.</p>
+    </div>
+    <div class="faq-item">
+      <h3>O site guarda os números que gero?</h3>
+      <p>Não. Todo o processamento é local no teu browser. Nenhum dado é enviado para servidores. Os únicos dados recolhidos são de analytics anónimos e publicidade, conforme a nossa Política de Privacidade.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Como funciona o Número da Sorte do Totoloto?</h3>
+      <p>O Totoloto tem 5 números principais (1–49) e um Número da Sorte independente (1–13). No nosso gerador aparece sempre destacado a laranja para fácil identificação.</p>
+    </div>
+    <div class="faq-item">
+      <h3>O site é totalmente gratuito?</h3>
+      <p>Sim, sem registo e sem limites. O site é financiado por publicidade não intrusiva do Google AdSense, que nos permite mantê-lo gratuito para todos.</p>
+    </div>
   </div>
 
 </div>
 
 <!-- FOOTER AD -->
-<div style="position:relative;z-index:1;display:flex;justify-content:center;padding:0 20px 40px;">
-  <div class="ad-banner">
-    728 × 90 — Banner rodapé
-  </div>
+<div style="display:flex;justify-content:center;padding:0 24px 32px;">
+  <div class="ad-banner" style="background:var(--white);">728 × 90 — Banner rodapé</div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="logo">sorteador<span>.io</span></div>
-  <p>Aleatoriedade real com <code style="color:var(--accent)">crypto.getRandomValues</code> — 100% no browser, sem servidor.</p>
+  <div class="logo">números<span>sortear</span></div>
+  <p>Aleatoriedade real com <code style="color:var(--c1);font-size:0.75rem">crypto.getRandomValues</code> — 100% no browser.</p>
   <div class="footer-links">
     <a href="privacidade.html">Privacidade</a>
-    <a href="#">Termos</a>
-    <a href="#">Contacto</a>
-    <a href="#">API</a>
+    <a href="privacidade.html">Termos</a>
+    <a href="mailto:andrecastroemail@gmail.com">Contacto</a>
   </div>
 </footer>
 
@@ -843,44 +887,38 @@ Massa</textarea>
     const unique = document.getElementById('numUnique').checked;
     const box = document.getElementById('numResult');
 
-    if (min >= max) { box.innerHTML = '<span style="color:var(--accent2)">Mínimo deve ser menor que máximo</span>'; return; }
+    if (min >= max) { box.innerHTML = '<span style="color:#e05a3a;font-size:0.85rem">Mínimo deve ser menor que máximo</span>'; return; }
 
     let nums = [];
     if (unique) {
       const pool = Array.from({length: max - min + 1}, (_, i) => min + i);
       for (let i = pool.length - 1; i > 0; i--) {
-        const j = rand(0, i);
-        [pool[i], pool[j]] = [pool[j], pool[i]];
+        const j = rand(0, i); [pool[i], pool[j]] = [pool[j], pool[i]];
       }
       nums = pool.slice(0, qty);
     } else {
       for (let i = 0; i < qty; i++) nums.push(rand(min, max));
     }
 
-    if (qty === 1) {
-      box.innerHTML = `<span class="result-number">${nums[0]}</span>`;
-    } else {
-      box.innerHTML = nums.map(n => `<span class="result-tag">${n}</span>`).join('');
-    }
+    box.innerHTML = qty === 1
+      ? `<span class="result-number">${nums[0]}</span>`
+      : nums.map(n => `<span class="result-tag">${n}</span>`).join('');
 
-    const hist = document.getElementById('numHistory');
-    hist.innerHTML = `Último: <span>${nums.join(', ')}</span>`;
+    document.getElementById('numHistory').innerHTML = `Último: <span>${nums.join(', ')}</span>`;
     updateStats();
   }
 
   /* ── Lotaria ── */
   const lottoConfig = {
-    euro: { n: 50, pick: 5, stars: { n: 12, pick: 2 }, label: 'Euromilhões' },
-    toto: { n: 49, pick: 5, lucky: { n: 13, pick: 1 }, label: 'Totoloto' },
-    '5x50': { n: 50, pick: 5, label: '5 de 50' }
+    euro: { n: 50, pick: 5, stars: { n: 12, pick: 2 } },
+    toto: { n: 49, pick: 5, lucky: { n: 13, pick: 1 } },
+    '5x50': { n: 50, pick: 5 }
   };
 
   function atualizarModo() {
     const mode = document.getElementById('lottoMode').value;
-    const cf1 = document.getElementById('customFields');
-    const cf2 = document.getElementById('customFields2');
-    cf1.style.display = mode === 'custom' ? 'flex' : 'none';
-    cf2.style.display = mode === 'custom' ? 'flex' : 'none';
+    document.getElementById('customFields').style.display  = mode === 'custom' ? 'flex' : 'none';
+    document.getElementById('customFields2').style.display = mode === 'custom' ? 'flex' : 'none';
   }
 
   function pickUnique(n, count) {
@@ -893,57 +931,46 @@ Massa</textarea>
 
   function gerarLotaria() {
     const mode = document.getElementById('lottoMode').value;
-    const box = document.getElementById('lottoResult');
-    const histEl = document.getElementById('lottoHistory');
-    let nums, html = '', histHTML = '';
+    const box  = document.getElementById('lottoResult');
+    const hist = document.getElementById('lottoHistory');
+    let html = '', histHTML = '';
 
     if (mode === 'custom') {
-      const n = parseInt(document.getElementById('lottoBalls').value) || 49;
-      const pick = parseInt(document.getElementById('lottoPick').value) || 6;
-      nums = pickUnique(n, pick);
-      html = nums.map(n => `<div class="lotto-ball">${n}</div>`).join('');
+      const n    = parseInt(document.getElementById('lottoBalls').value) || 49;
+      const pick = parseInt(document.getElementById('lottoPick').value)  || 6;
+      const nums = pickUnique(n, pick);
+      html     = `<div class="lotto-row">${nums.map(n => `<div class="lotto-ball">${n}</div>`).join('')}</div>`;
       histHTML = `Chave: <span>${nums.join(' - ')}</span>`;
 
     } else if (mode === 'euro') {
-      const cfg = lottoConfig.euro;
-      nums = pickUnique(cfg.n, cfg.pick);
-      const stars = pickUnique(cfg.stars.n, cfg.stars.pick);
-
-      // Balls row
-      const ballsHTML = nums.map(n => `<div class="lotto-ball">${n}</div>`).join('');
-      // Plus separator
-      const plusHTML = `<div class="lotto-sep">+</div>`;
-      // Stars row
-      const starsHTML = stars.map(s => `<div class="lotto-ball estrela">${s}</div>`).join('');
-
-      html = `<div class="lotto-row">${ballsHTML}${plusHTML}${starsHTML}</div>`;
-      histHTML = `Chave: <span>${nums.join(' - ')}</span> &nbsp;<span style="color:var(--muted)">+</span>&nbsp; <span class="hist-stars">${stars.join(' - ')}</span>`;
+      const nums  = pickUnique(50, 5);
+      const stars = pickUnique(12, 2);
+      html = `<div class="lotto-row">
+        ${nums.map(n  => `<div class="lotto-ball">${n}</div>`).join('')}
+        <div class="lotto-sep">+</div>
+        ${stars.map(s => `<div class="lotto-ball estrela">${s}</div>`).join('')}
+      </div>`;
+      histHTML = `Chave: <span>${nums.join('-')}</span> &nbsp;+&nbsp; <span class="hist-stars">${stars.join(' - ')}</span>`;
 
     } else if (mode === 'toto') {
-      const cfg = lottoConfig.toto;
-      nums = pickUnique(cfg.n, cfg.pick);
+      const nums  = pickUnique(49, 5);
       const lucky = rand(1, 13);
-
-      // Balls
-      const ballsHTML = nums.map(n => `<div class="lotto-ball">${n}</div>`).join('');
-      // Plus separator
-      const plusHTML = `<div class="lotto-sep">+</div>`;
-      // Lucky number — big, highlighted
-      const luckyHTML = `<div class="lotto-ball lucky">${lucky}</div>`;
-
-      html = `<div class="lotto-row">${ballsHTML}${plusHTML}${luckyHTML}</div>
-              <div class="lotto-lucky-label">Número da Sorte</div>`;
+      html = `<div class="lotto-row">
+        ${nums.map(n => `<div class="lotto-ball">${n}</div>`).join('')}
+        <div class="lotto-sep">+</div>
+        <div class="lotto-ball lucky">${lucky}</div>
+      </div>
+      <div class="lotto-lucky-label">Número da Sorte</div>`;
       histHTML = `Chave: <span>${nums.join('-')}</span> &nbsp;+&nbsp; Nº Sorte: <span class="lucky-hist">${lucky}</span>`;
 
     } else {
-      const cfg = lottoConfig[mode];
-      nums = pickUnique(cfg.n, cfg.pick);
-      html = `<div class="lotto-row">${nums.map(n => `<div class="lotto-ball">${n}</div>`).join('')}</div>`;
+      const nums = pickUnique(50, 5);
+      html     = `<div class="lotto-row">${nums.map(n => `<div class="lotto-ball">${n}</div>`).join('')}</div>`;
       histHTML = `Chave: <span>${nums.join(' - ')}</span>`;
     }
 
-    box.innerHTML = html;
-    histEl.innerHTML = histHTML;
+    box.innerHTML  = html;
+    hist.innerHTML = histHTML;
     updateStats();
   }
 
@@ -959,79 +986,79 @@ Massa</textarea>
 
   function renderDie(val, type) {
     if (type !== '6') {
-      return `<div style="width:70px;height:70px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#1a1a2e;box-shadow:0 4px 20px rgba(0,0,0,0.5);animation:rollDie .4s cubic-bezier(.34,1.56,.64,1)">${val}</div>`;
+      return `<div style="width:64px;height:64px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:1.7rem;font-weight:500;color:var(--c3);box-shadow:0 3px 12px rgba(0,0,0,0.15);border:1px solid #ddd;animation:rollDie .35s cubic-bezier(.34,1.56,.64,1)">${val}</div>`;
     }
     const grid = Array(9).fill('');
-    const pattern = dotPatterns[val] || [];
-    pattern.forEach(([r, c]) => {
-      grid[r * 3 + c] = '<div class="dot"></div>';
-    });
+    dotPatterns[val]?.forEach(([r,c]) => { grid[r*3+c] = '<div class="dot"></div>'; });
     return `<div class="die">${grid.join('')}</div>`;
   }
 
   function lancarDados() {
     const type = document.getElementById('diceType').value;
-    const qty = Math.min(parseInt(document.getElementById('diceQty').value) || 1, 6);
-    const box = document.getElementById('diceResult');
-    const totalEl = document.getElementById('diceTotal');
-
+    const qty  = Math.min(parseInt(document.getElementById('diceQty').value) || 1, 6);
+    const box  = document.getElementById('diceResult');
     const vals = Array.from({length: qty}, () => rand(1, parseInt(type)));
     box.innerHTML = `<div class="dice-display">${vals.map(v => renderDie(v, type)).join('')}</div>`;
-
-    const total = vals.reduce((a, b) => a + b, 0);
-    totalEl.innerHTML = qty > 1 ? `Total: <span style="color:var(--accent);font-family:'DM Mono'">${total}</span>` : '';
+    const total = vals.reduce((a,b) => a+b, 0);
+    document.getElementById('diceTotal').innerHTML = qty > 1
+      ? `Total: <strong style="color:var(--c3);font-family:'DM Mono'">${total}</strong>` : '';
     updateStats();
   }
 
   /* ── Moeda ── */
   function lancarMoeda() {
-    const qty = Math.min(parseInt(document.getElementById('coinQty').value) || 1, 100);
-    const box = document.getElementById('coinResult');
+    const qty     = Math.min(parseInt(document.getElementById('coinQty').value) || 1, 100);
+    const box     = document.getElementById('coinResult');
     const statsEl = document.getElementById('coinStats');
-
     let caras = 0, coroas = 0;
     const results = Array.from({length: qty}, () => rand(0, 1));
     results.forEach(r => r === 0 ? caras++ : coroas++);
 
     if (qty === 1) {
       const isCara = results[0] === 0;
-      box.innerHTML = `<div class="coin ${isCara ? 'heads' : 'tails'}">${isCara ? '⚜️' : '🔵'}</div><div style="margin-left:20px;text-align:left"><div style="font-family:'Bebas Neue';font-size:2.5rem;color:${isCara ? 'var(--accent3)' : 'var(--muted)'}">${isCara ? 'CARA' : 'COROA'}</div></div>`;
+      box.innerHTML = `
+        <div style="display:flex;align-items:center;gap:20px;">
+          <div class="coin ${isCara ? 'heads' : 'tails'}">${isCara ? '⚜️' : '🔵'}</div>
+          <div class="coin-label">
+            <div style="font-size:2.2rem;font-weight:700;color:${isCara ? 'var(--c2)' : 'var(--muted)'};line-height:1;">${isCara ? 'CARA' : 'COROA'}</div>
+            <div style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px;">${isCara ? 'Cara' : 'Coroa'}</div>
+          </div>
+        </div>`;
       statsEl.innerHTML = '';
     } else {
-      box.innerHTML = `<div style="text-align:center"><div style="font-family:'Bebas Neue';font-size:3rem;color:var(--accent3)">${caras} cara${caras !== 1 ? 's' : ''}</div><div style="font-family:'Bebas Neue';font-size:2rem;color:var(--muted)">${coroas} coroa${coroas !== 1 ? 's' : ''}</div></div>`;
-      statsEl.innerHTML = `De ${qty} lançamentos — Cara: ${Math.round(caras/qty*100)}% | Coroa: ${Math.round(coroas/qty*100)}%`;
+      box.innerHTML = `<div style="text-align:center">
+        <div style="font-size:2.4rem;font-weight:700;color:var(--c2)">${caras} cara${caras!==1?'s':''}</div>
+        <div style="font-size:1.6rem;font-weight:600;color:var(--muted)">${coroas} coroa${coroas!==1?'s':''}</div>
+      </div>`;
+      statsEl.innerHTML = `De ${qty} lançamentos — Cara: ${Math.round(caras/qty*100)}% · Coroa: ${Math.round(coroas/qty*100)}%`;
     }
     updateStats();
   }
 
   /* ── Senha ── */
   let lastPass = '';
-
   function gerarSenha() {
     const len = parseInt(document.getElementById('passLen').value);
     let chars = '';
     if (document.getElementById('passUpper').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     if (document.getElementById('passLower').checked) chars += 'abcdefghijklmnopqrstuvwxyz';
-    if (document.getElementById('passNum').checked) chars += '0123456789';
-    if (document.getElementById('passSym').checked) chars += '!@#$%^&*()-_=+[]{}|;:,.<>?';
-
-    if (!chars) { document.getElementById('passResult').innerHTML = '<span style="color:var(--accent2)">Seleciona pelo menos um tipo de caracter</span>'; return; }
-
+    if (document.getElementById('passNum').checked)   chars += '0123456789';
+    if (document.getElementById('passSym').checked)   chars += '!@#$%^&*()-_=+[]{}|;:,.<>?';
+    if (!chars) { document.getElementById('passResult').innerHTML = '<span style="color:var(--c3);font-size:0.85rem">Seleciona pelo menos um tipo</span>'; return; }
     const arr = new Uint32Array(len);
     crypto.getRandomValues(arr);
     lastPass = Array.from(arr).map(v => chars[v % chars.length]).join('');
-
-    document.getElementById('passResult').innerHTML = `<span class="pass-output">${lastPass}</span>`;
+    const strength = ['passUpper','passLower','passNum','passSym'].filter(id => document.getElementById(id).checked).length;
+    const labels = ['','Fraca','Média','Forte','Muito forte'];
+    const colors = ['','var(--c3)','var(--c2)','var(--c5)','var(--c5)'];
+    document.getElementById('passResult').innerHTML =
+      `<div style="width:100%;text-align:center">
+        <span class="pass-output">${lastPass}</span>
+        <div style="font-size:0.72rem;margin-top:8px;color:${colors[strength]};font-weight:600">${labels[strength]}</div>
+      </div>`;
     document.getElementById('copyBtn').style.display = 'inline-flex';
-
-    // Strength
-    const strength = [document.getElementById('passUpper'), document.getElementById('passLower'), document.getElementById('passNum'), document.getElementById('passSym')].filter(c => c.checked).length;
-    const labels = ['', 'Fraca', 'Média', 'Forte', '💪 Muito forte'];
-    const colors = ['', 'var(--accent2)', 'var(--accent3)', 'var(--accent)', 'var(--accent)'];
-    document.getElementById('passResult').innerHTML += `<div style="font-size:0.75rem;margin-top:8px;color:${colors[strength]};">${labels[strength]}</div>`;
     updateStats();
   }
-
   function copiarSenha() {
     navigator.clipboard.writeText(lastPass).then(() => {
       const btn = document.getElementById('copyBtn');
@@ -1042,19 +1069,19 @@ Massa</textarea>
 
   /* ── Escolha Aleatória ── */
   function escolhaAleatoria() {
-    const lines = document.getElementById('choiceInput').value.split('\n').map(l => l.trim()).filter(Boolean);
-    const box = document.getElementById('choiceResult');
-
-    if (!lines.length) { box.innerHTML = '<span style="color:var(--accent2)">Adiciona pelo menos uma opção</span>'; return; }
-
+    const lines = document.getElementById('choiceInput').value.split('\n').map(l=>l.trim()).filter(Boolean);
+    const box   = document.getElementById('choiceResult');
+    if (!lines.length) { box.innerHTML = '<span style="color:var(--c3);font-size:0.85rem">Adiciona pelo menos uma opção</span>'; return; }
     const idx = rand(0, lines.length - 1);
-    box.innerHTML = `<div style="text-align:center"><div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:8px">A sorte escolheu</div><div class="result-number" style="font-size:2.5rem">${lines[idx]}</div></div>`;
+    box.innerHTML = `<div style="text-align:center">
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:6px;font-weight:600">A sorte escolheu</div>
+      <div style="font-size:2rem;font-weight:700;color:var(--c6);animation:popIn .28s cubic-bezier(.34,1.56,.64,1)">${lines[idx]}</div>
+    </div>`;
     updateStats();
   }
 
-  // Enter key for main tool
   document.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && document.activeElement.id.startsWith('num')) gerarNumero();
+    if (e.key === 'Enter' && document.activeElement.id?.startsWith('num')) gerarNumero();
   });
 </script>
 </body>
