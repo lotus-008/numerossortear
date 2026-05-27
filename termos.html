@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Política de Privacidade — numerossortear.com</title>
-  <meta name="description" content="Política de Privacidade do numerossortear.com"/>
+  <title>Termos de Utilização — numerossortear.com</title>
+  <meta name="description" content="Termos de Utilização do numerossortear.com"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
@@ -61,11 +61,17 @@
     a:hover { text-decoration: underline; }
     code { font-size: 0.82rem; color: var(--c1); background: #eef2ff; padding: 2px 6px; border-radius: 4px; }
 
-    .contact-box {
+    .highlight-box {
       background: #eef2ff; border: 1px solid #c7d7fd;
       border-radius: 8px; padding: 16px 20px; margin-top: 12px;
     }
-    .contact-box p { color: var(--text); font-weight: 500; }
+    .highlight-box p { color: var(--text); font-weight: 500; margin: 0; }
+
+    .warning-box {
+      background: #fff8ee; border: 1px solid #fcd9a0;
+      border-radius: 8px; padding: 16px 20px; margin-top: 12px;
+    }
+    .warning-box p { color: #7a5000; margin: 0; }
 
     footer {
       background: var(--white); border-top: 1px solid var(--border);
@@ -91,65 +97,89 @@
 </header>
 
 <div class="container">
-  <div class="page-badge">⚖️ Legal</div>
-  <h1>Política de Privacidade</h1>
+  <div class="page-badge">📋 Legal</div>
+  <h1>Termos de Utilização</h1>
   <p class="last-updated">Última atualização: 27 de maio de 2026</p>
 
   <div class="card">
-    <h2>1. Quem somos</h2>
-    <p>O <strong>numerossortear.com</strong> é um site de ferramentas gratuitas de aleatoriedade — gerador de números aleatórios, chaves de lotaria, dados, moedas e senhas. Todas as operações são executadas diretamente no teu browser, sem envio de dados para servidores.</p>
+    <h2>1. Aceitação dos termos</h2>
+    <p>Ao acederes e utilizares o site <strong>numerossortear.com</strong>, concordas com os presentes Termos de Utilização. Se não concordares com algum dos termos aqui descritos, deves cessar a utilização do site imediatamente.</p>
+    <p>Reservamo-nos o direito de atualizar estes termos a qualquer momento. A continuação da utilização do site após qualquer alteração constitui a tua aceitação dos novos termos.</p>
   </div>
 
   <div class="card">
-    <h2>2. Dados que recolhemos</h2>
-    <p>Este site não recolhe dados pessoais identificáveis diretamente. No entanto, alguns serviços de terceiros integrados podem recolher dados automaticamente:</p>
+    <h2>2. Descrição do serviço</h2>
+    <p>O <strong>numerossortear.com</strong> é um serviço gratuito de geração de números aleatórios e sorteios online. O site disponibiliza as seguintes ferramentas:</p>
     <ul>
-      <li><strong>Anúncios</strong> — podem recolher dados de navegação e definir cookies para mostrar anúncios relevantes.</li>
-      <li><strong>Google Analytics</strong> — recolhe dados anónimos de utilização (páginas visitadas, tempo no site, país, dispositivo) para fins estatísticos.</li>
+      <li>Gerador de números aleatórios com intervalo personalizável</li>
+      <li>Gerador de chaves para Euromilhões e Totoloto</li>
+      <li>Lançador de dados virtuais (D4 a D100)</li>
+      <li>Simulador de lançamento de moeda</li>
+      <li>Gerador de senhas seguras</li>
+      <li>Sorteio de opções personalizadas</li>
     </ul>
-    <p>Nenhum destes dados é vendido ou partilhado com terceiros além dos próprios serviços indicados.</p>
+    <p>Todos os sorteios são gerados localmente no teu browser através da API <code>crypto.getRandomValues</code>, sem qualquer intervenção ou armazenamento por parte dos nossos servidores.</p>
   </div>
 
   <div class="card">
-    <h2>3. Cookies</h2>
-    <p>Utilizamos cookies para os seguintes fins:</p>
+    <h2>3. Utilização permitida</h2>
+    <p>O site destina-se a uso pessoal, recreativo e informativo. Podes utilizar livremente as ferramentas disponíveis para:</p>
     <ul>
-      <li><strong>Cookies de publicidade</strong> — usados para mostrar anúncios com base nos teus interesses.</li>
-      <li><strong>Cookies de análise</strong> — usados para entender como os visitantes utilizam o site.</li>
+      <li>Gerar chaves para participação em jogos de lotaria</li>
+      <li>Realizar sorteios e decisões aleatórias</li>
+      <li>Jogos de tabuleiro e RPG</li>
+      <li>Fins educativos e demonstrações de probabilidade</li>
+      <li>Geração de senhas para uso pessoal</li>
     </ul>
-    <p>Ao entrares no site pela primeira vez, ser-te-á apresentado um banner de consentimento onde podes aceitar, recusar ou gerir as tuas preferências de cookies. Podes também gerir ou eliminar cookies a qualquer momento nas definições do teu browser.</p>
   </div>
 
   <div class="card">
-    <h2>4. Publicidade</h2>
-    <p>Este site exibe anúncios para se manter gratuito. Esses anúncios podem usar cookies para mostrar conteúdo baseado nas tuas visitas anteriores a este e a outros sites.</p>
-    <p>Podes gerir as tuas preferências de publicidade personalizada nas definições do teu browser ou através das opções de privacidade disponíveis nos serviços de anúncios.</p>
-  </div>
-
-  <div class="card">
-    <h2>5. Os teus direitos (RGPD)</h2>
-    <p>Ao abrigo do Regulamento Geral de Proteção de Dados (RGPD), tens os seguintes direitos:</p>
+    <h2>4. Limitações e isenção de responsabilidade</h2>
+    <div class="warning-box">
+      <p>⚠️ Os números gerados por este site são produzidos de forma aleatória e não garantem qualquer resultado em jogos de lotaria ou apostas. A utilização deste site para fins de jogo é da exclusiva responsabilidade do utilizador.</p>
+    </div>
+    <p style="margin-top:14px;">O <strong>numerossortear.com</strong> não se responsabiliza por:</p>
     <ul>
-      <li>Direito de acesso aos teus dados pessoais</li>
-      <li>Direito de retificação de dados incorretos</li>
-      <li>Direito ao apagamento dos teus dados</li>
-      <li>Direito de oposição ao tratamento dos teus dados</li>
-      <li>Direito de retirar o consentimento a qualquer momento</li>
+      <li>Perdas financeiras resultantes da utilização dos números gerados</li>
+      <li>Interrupções ou indisponibilidade do serviço</li>
+      <li>Erros ou imprecisões no conteúdo do site</li>
+      <li>Danos indiretos resultantes da utilização ou incapacidade de utilização do site</li>
     </ul>
-    <p>Para exercer qualquer um destes direitos, contacta-nos através do email indicado abaixo.</p>
   </div>
 
   <div class="card">
-    <h2>6. Alterações a esta política</h2>
-    <p>Podemos atualizar esta Política de Privacidade ocasionalmente. Quaisquer alterações serão publicadas nesta página com a data de atualização. Recomendamos que a consultes periodicamente.</p>
+    <h2>5. Jogo responsável</h2>
+    <p>Este site não promove nem incentiva o jogo compulsivo. Os jogos de lotaria e apostas devem ser praticados de forma responsável e dentro dos limites legais do teu país.</p>
+    <p>Se sentires que tens um problema com o jogo, procura ajuda junto de organizações especializadas como o <a href="https://www.jogoresponsavel.pt" target="_blank">Jogo Responsável</a> em Portugal.</p>
   </div>
 
   <div class="card">
-    <h2>7. Contacto</h2>
-    <p>Se tiveres questões sobre esta política ou sobre o tratamento dos teus dados:</p>
-    <div class="contact-box">
+    <h2>6. Propriedade intelectual</h2>
+    <p>Todo o conteúdo do site — incluindo textos, design, código e logótipo — é propriedade do <strong>numerossortear.com</strong> e está protegido por direitos de autor.</p>
+    <p>É proibida a reprodução, distribuição ou utilização comercial de qualquer conteúdo do site sem autorização prévia por escrito.</p>
+  </div>
+
+  <div class="card">
+    <h2>7. Publicidade</h2>
+    <p>O site é financiado por anúncios que permitem manter o serviço gratuito. Ao utilizares o site, aceitas a exibição de anúncios. Não nos responsabilizamos pelo conteúdo de anúncios de terceiros.</p>
+  </div>
+
+  <div class="card">
+    <h2>8. Privacidade</h2>
+    <p>A recolha e tratamento de dados pessoais é regida pela nossa <a href="privacidade.html">Política de Privacidade</a>, que faz parte integrante destes Termos de Utilização.</p>
+  </div>
+
+  <div class="card">
+    <h2>9. Lei aplicável</h2>
+    <p>Estes Termos de Utilização são regidos pela legislação portuguesa. Qualquer litígio será submetido à jurisdição exclusiva dos tribunais portugueses.</p>
+  </div>
+
+  <div class="card">
+    <h2>10. Contacto</h2>
+    <p>Para questões relacionadas com estes termos:</p>
+    <div class="highlight-box">
       <p>📧 Email: <a href="mailto:andrecastroemail@gmail.com">andrecastroemail@gmail.com</a></p>
-      <p>🌐 Site: <a href="https://numerossortear.com">numerossortear.com</a></p>
+      <p style="margin-top:6px;">🌐 Site: <a href="https://numerossortear.com">numerossortear.com</a></p>
     </div>
   </div>
 

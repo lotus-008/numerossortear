@@ -403,6 +403,20 @@
       word-break: break-all; text-align: center;
       animation: popIn 0.25s ease;
     }
+    .preset-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--white);
+      border: 1px solid #f9c0d0;
+      color: var(--c6);
+      font-size: 0.76rem; font-weight: 600;
+      padding: 5px 12px; border-radius: 100px;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: all 0.15s;
+    }
+    .preset-btn:hover {
+      background: #fde8ef; border-color: var(--c6);
+    }
+
     input[type="range"] {
       -webkit-appearance: none; width: 100%;
       height: 4px; background: var(--border);
@@ -563,8 +577,8 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-pill">⚡ Ferramentas gratuitas de aleatoriedade</div>
-  <h1>Gera <span>números aleatórios</span><br>instantaneamente</h1>
-  <p>Euromilhões, Totoloto, dados, moeda, senhas e sorteios — tudo grátis, sem registo.</p>
+  <h1>Gera <span>números aleatórios</span><br>— e não só 🍕 ✈️ 🎯</h1>
+  <p>Euromilhões, Totoloto, dados, moeda, senhas — e sorteia qualquer decisão da tua vida. Tudo grátis, sem registo.</p>
 </div>
 
 <!-- AD BANNER TOP -->
@@ -751,29 +765,44 @@
     </div>
 
     <!-- ⑥ ESCOLHA -->
-    <div class="card" id="escolha">
-      <div class="card-header">
-        <div class="card-icon c6">🔀</div>
-        <div>
-          <div class="card-title">Escolha Aleatória</div>
-          <div class="card-desc">Deixa o acaso decidir por ti</div>
+    <div class="card" id="escolha" style="border-color:#f9c0d0;border-width:1.5px;">
+      <div style="background:linear-gradient(135deg,#fff0f4,#fff8fa);padding:20px 24px 0;border-radius:12px 12px 0 0;">
+        <div class="card-header" style="padding:0 0 16px 0;">
+          <div class="card-icon c6" style="background:#fde8ef;">🔀</div>
+          <div>
+            <div class="card-title">Escolha Aleatória</div>
+            <div class="card-desc">Não consegues decidir? Deixa o acaso escolher por ti</div>
+          </div>
+        </div>
+        <!-- Quick scenario buttons -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px;padding-bottom:18px;">
+          <span style="font-size:0.7rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;align-self:center;margin-right:4px;">Exemplos:</span>
+          <button class="preset-btn" onclick="loadPreset('refeicoes')">🍕 Refeições</button>
+          <button class="preset-btn" onclick="loadPreset('destinos')">✈️ Destinos</button>
+          <button class="preset-btn" onclick="loadPreset('fins_semana')">🎉 Fim de semana</button>
+          <button class="preset-btn" onclick="loadPreset('series')">📺 Séries</button>
+          <button class="preset-btn" onclick="loadPreset('desporto')">⚽ Desporto</button>
         </div>
       </div>
-      <div class="divider" style="margin-top:18px;"></div>
+      <div class="divider"></div>
       <div class="card-body">
         <div class="controls" style="flex-direction:column;align-items:flex-start;gap:12px;">
           <div class="field" style="width:100%">
-            <label>Opções (uma por linha)</label>
-            <textarea id="choiceInput" rows="5" style="width:100%;background:var(--faint);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;color:var(--text);font-family:'Inter',sans-serif;font-size:0.88rem;outline:none;resize:vertical;line-height:1.6">Pizza
+            <label>As tuas opções (uma por linha)</label>
+            <textarea id="choiceInput" rows="6" style="width:100%;background:var(--faint);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;color:var(--text);font-family:'Inter',sans-serif;font-size:0.88rem;outline:none;resize:vertical;line-height:1.7;transition:border-color .15s;" onfocus="this.style.borderColor='var(--c6)'" onblur="this.style.borderColor='var(--border)'" oninput="updateChoiceCount()">Pizza
 Sushi
 Hambúrguer
 Tacos
 Massa
 Francesinha</textarea>
           </div>
-          <button class="btn btn-c6" onclick="escolhaAleatoria()">Sortear opção</button>
+          <div style="display:flex;gap:10px;align-items:center;width:100%;">
+            <button class="btn btn-c6" onclick="escolhaAleatoria()" style="flex-shrink:0;">🎲 Sortear opção</button>
+            <button class="btn btn-ghost" onclick="limparEscolha()" style="font-size:0.78rem;">Limpar</button>
+            <span id="choiceCount" style="margin-left:auto;font-size:0.75rem;color:var(--muted);"></span>
+          </div>
         </div>
-        <div class="result-box" id="choiceResult" style="margin-top:16px">
+        <div class="result-box" id="choiceResult" style="margin-top:16px;min-height:90px;background:linear-gradient(135deg,#fff0f4,#fff8fa);border-color:#f9c0d0;">
           <span class="result-placeholder">Insere as opções e sorteia!</span>
         </div>
       </div>
@@ -859,7 +888,7 @@ Francesinha</textarea>
   <p>Aleatoriedade real com <code style="color:var(--c1);font-size:0.75rem">crypto.getRandomValues</code> — 100% no browser.</p>
   <div class="footer-links">
     <a href="privacidade.html">Privacidade</a>
-    <a href="privacidade.html">Termos</a>
+    <a href="termos.html">Termos</a>
     <a href="mailto:andrecastroemail@gmail.com">Contacto</a>
   </div>
 </footer>
@@ -1068,14 +1097,42 @@ Francesinha</textarea>
   }
 
   /* ── Escolha Aleatória ── */
+  function limparEscolha() {
+    document.getElementById('choiceInput').value = '';
+    document.getElementById('choiceResult').innerHTML = '<span class="result-placeholder">Insere as opções e sorteia!</span>';
+    const el = document.getElementById('choiceCount');
+    if (el) el.textContent = '';
+  }
+
+  const presets = {
+    refeicoes:   "Pizza\nSushi\nHambúrguer\nTacos\nMassa\nFrancesinha\nSalada\nGrelhado",
+    destinos:    "Porto\nLisboa\nAlgarve\nMadeira\nAçores\nEspanha\nItália\nParis",
+    fins_semana: "Cinema\nJantar fora\nPasseio na natureza\nDia em casa\nPraia\nMuseu\nConcerto",
+    series:      "Breaking Bad\nGame of Thrones\nStranger Things\nThe Office\nBlack Mirror\nPeaky Blinders",
+    desporto:    "Futebol\nTénis\nBasquetebol\nNatação\nCiclismo\nGinásio\nCorrida"
+  };
+
+  function loadPreset(key) {
+    document.getElementById('choiceInput').value = presets[key];
+    updateChoiceCount();
+  }
+
+  function updateChoiceCount() {
+    const lines = document.getElementById('choiceInput').value.split('\n').map(l=>l.trim()).filter(Boolean);
+    const el = document.getElementById('choiceCount');
+    if (el) el.textContent = lines.length > 0 ? lines.length + ' opções' : '';
+  }
+
   function escolhaAleatoria() {
     const lines = document.getElementById('choiceInput').value.split('\n').map(l=>l.trim()).filter(Boolean);
     const box   = document.getElementById('choiceResult');
+    updateChoiceCount();
     if (!lines.length) { box.innerHTML = '<span style="color:var(--c3);font-size:0.85rem">Adiciona pelo menos uma opção</span>'; return; }
     const idx = rand(0, lines.length - 1);
     box.innerHTML = `<div style="text-align:center">
-      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:6px;font-weight:600">A sorte escolheu</div>
-      <div style="font-size:2rem;font-weight:700;color:var(--c6);animation:popIn .28s cubic-bezier(.34,1.56,.64,1)">${lines[idx]}</div>
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px;font-weight:600">A sorte escolheu</div>
+      <div style="font-size:2.2rem;font-weight:700;color:var(--c6);animation:popIn .28s cubic-bezier(.34,1.56,.64,1);line-height:1.2;">${lines[idx]}</div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:8px;">de ${lines.length} opções</div>
     </div>`;
     updateStats();
   }
