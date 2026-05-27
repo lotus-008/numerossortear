@@ -371,20 +371,37 @@
     }
 
     /* ── Coin ── */
-    .coin {
+    /* Neutral spinning coin — shown during animation */
+    .coin-spin {
       width: 90px; height: 90px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 2.4rem;
-      animation: flipCoin 1.2s ease-in-out;
+      background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      animation: flipCoin 1.2s ease-in-out forwards;
     }
-    .coin.heads { background: linear-gradient(135deg, #ffd166, #f4a261); box-shadow: 0 4px 16px rgba(255,180,50,0.35); }
-    .coin.tails { background: linear-gradient(135deg, #cbd5e1, #94a3b8); box-shadow: 0 4px 16px rgba(148,163,184,0.35); }
+    /* Result coin — hidden until spin ends */
+    .coin-result {
+      width: 90px; height: 90px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+      opacity: 0;
+      animation: revealCoin 0.4s ease forwards;
+      animation-delay: 1.2s;
+    }
+    .coin-result.heads { background: linear-gradient(135deg, #ffd166, #f4a261); box-shadow: 0 4px 16px rgba(255,180,50,0.35); }
+    .coin-result.tails { background: linear-gradient(135deg, #cbd5e1, #94a3b8); box-shadow: 0 4px 16px rgba(148,163,184,0.35); }
     @keyframes flipCoin {
-      0%   { transform: scaleX(1); }
-      25%  { transform: scaleX(0); }
-      50%  { transform: scaleX(1); }
-      75%  { transform: scaleX(0); }
-      100% { transform: scaleX(1); }
+      0%   { transform: scaleX(1); opacity: 1; }
+      25%  { transform: scaleX(0); opacity: 1; }
+      50%  { transform: scaleX(1); opacity: 1; }
+      75%  { transform: scaleX(0); opacity: 1; }
+      99%  { transform: scaleX(1); opacity: 1; }
+      100% { transform: scaleX(0); opacity: 0; width: 0; margin: 0; padding: 0; }
+    }
+    @keyframes revealCoin {
+      from { opacity: 0; transform: scaleX(0); }
+      to   { opacity: 1; transform: scaleX(1); }
     }
     .coin-label {
       opacity: 0;
@@ -656,7 +673,7 @@
           </div>
           <div class="field" id="customFields2" style="display:none">
             <label>Escolher</label>
-            <input type="number" id="lottoPick" value="6" style="width:80px"/>
+            <input type="number" id="lottoPick" value="5" style="width:80px"/>
           </div>
           <button class="btn btn-c2" onclick="gerarLotaria()">Gerar Chave</button>
         </div>
@@ -760,7 +777,6 @@
         <div class="result-box" id="passResult">
           <span class="result-placeholder">Clica para gerar</span>
         </div>
-        <button class="copy-btn" id="copyBtn" onclick="copiarSenha()" style="display:none">📋 Copiar senha</button>
       </div>
     </div>
 
@@ -1045,12 +1061,15 @@ Francesinha</textarea>
 
     if (qty === 1) {
       const isCara = results[0] === 0;
+      // Show neutral coin spinning; result coin + label appear after 1.2s
       box.innerHTML = `
-        <div style="display:flex;align-items:center;gap:20px;">
-          <div class="coin ${isCara ? 'heads' : 'tails'}">${isCara ? '⚜️' : '🔵'}</div>
+        <div style="display:flex;align-items:center;gap:24px;justify-content:center;">
+          <div style="position:relative;width:90px;height:90px;flex-shrink:0;">
+            <div class="coin-spin" style="position:absolute;top:0;left:0;">🪙</div>
+            <div class="coin-result ${isCara ? 'heads' : 'tails'}" style="position:absolute;top:0;left:0;">${isCara ? '⚜️' : '🔵'}</div>
+          </div>
           <div class="coin-label">
-            <div style="font-size:2.2rem;font-weight:700;color:${isCara ? 'var(--c2)' : 'var(--muted)'};line-height:1;">${isCara ? 'CARA' : 'COROA'}</div>
-            <div style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px;">${isCara ? 'Cara' : 'Coroa'}</div>
+            <div style="font-size:3rem;font-weight:700;color:${isCara ? 'var(--c2)' : 'var(--muted)'};line-height:1;letter-spacing:-1px;">${isCara ? 'CARA' : 'COROA'}</div>
           </div>
         </div>`;
       statsEl.innerHTML = '';
@@ -1081,18 +1100,30 @@ Francesinha</textarea>
     const labels = ['','Fraca','Média','Forte','Muito forte'];
     const colors = ['','var(--c3)','var(--c2)','var(--c5)','var(--c5)'];
     document.getElementById('passResult').innerHTML =
-      `<div style="width:100%;text-align:center">
+      `<div style="width:100%;text-align:center;">
         <span class="pass-output">${lastPass}</span>
-        <div style="font-size:0.72rem;margin-top:8px;color:${colors[strength]};font-weight:600">${labels[strength]}</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;flex-wrap:wrap;">
+          <button id="copyBtn" onclick="copiarSenha()" style="display:inline-flex;align-items:center;gap:5px;background:#eef2ff;border:1px solid #c7d7fd;color:var(--c1);font-size:0.78rem;font-weight:600;padding:7px 16px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s;" onmouseover="this.style.background='#dbe5fd'" onmouseout="this.style.background='#eef2ff'">
+            📋 Copiar senha
+          </button>
+          <span style="font-size:0.72rem;color:${colors[strength]};font-weight:600;">${labels[strength]}</span>
+        </div>
       </div>`;
-    document.getElementById('copyBtn').style.display = 'inline-flex';
     updateStats();
   }
   function copiarSenha() {
     navigator.clipboard.writeText(lastPass).then(() => {
       const btn = document.getElementById('copyBtn');
-      btn.textContent = '✅ Copiada!';
-      setTimeout(() => btn.innerHTML = '📋 Copiar senha', 2000);
+      btn.innerHTML = '✅ Copiada!';
+      btn.style.background = '#e6f7f2';
+      btn.style.borderColor = '#a0dcc8';
+      btn.style.color = 'var(--c5)';
+      setTimeout(() => {
+        btn.innerHTML = '📋 Copiar';
+        btn.style.background = '#eef2ff';
+        btn.style.borderColor = '#c7d7fd';
+        btn.style.color = 'var(--c1)';
+      }, 2000);
     });
   }
 
