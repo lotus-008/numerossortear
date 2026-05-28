@@ -819,7 +819,7 @@ Francesinha</textarea>
           </div>
         </div>
         <div class="result-box" id="choiceResult" style="margin-top:16px;min-height:90px;background:linear-gradient(135deg,#fff0f4,#fff8fa);border-color:#f9c0d0;">
-          <span class="result-placeholder">Insere as opções e sorteia!</span>
+          <span style="color:var(--muted);font-size:0.85rem;line-height:1.6">Escreve as tuas opções acima ou escolhe um exemplo:<br><span style="color:var(--c6);font-weight:600">🍕 Refeições · ✈️ Destinos · 🎉 Fim de semana · 📺 Séries · ⚽ Desporto</span></span>
         </div>
       </div>
     </div>
@@ -1130,7 +1130,7 @@ Francesinha</textarea>
   /* ── Escolha Aleatória ── */
   function limparEscolha() {
     document.getElementById('choiceInput').value = '';
-    document.getElementById('choiceResult').innerHTML = '<span class="result-placeholder">Insere as opções e sorteia!</span>';
+    document.getElementById('choiceResult').innerHTML = '<span style=\"color:var(--muted);font-size:0.85rem;line-height:1.6\">Escreve as tuas opções acima ou escolhe um exemplo:<br><span style=\"color:var(--c6);font-weight:600\">🍕 Refeições · ✈️ Destinos · 🎉 Fim de semana · 📺 Séries · ⚽ Desporto</span></span>';
     const el = document.getElementById('choiceCount');
     if (el) el.textContent = '';
     recentChoices.length = 0; // reset history on clear
