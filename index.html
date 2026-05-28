@@ -1163,7 +1163,7 @@ Francesinha</textarea>
     const lines = document.getElementById('choiceInput').value.split('\n').map(l=>l.trim()).filter(Boolean);
     const box   = document.getElementById('choiceResult');
     updateChoiceCount();
-    if (!lines.length) { box.innerHTML = '<span style="color:var(--c3);font-size:0.85rem">Adiciona pelo menos uma opção</span>'; return; }
+    if (!lines.length) { box.innerHTML = '<span style="color:var(--muted);font-size:0.85rem;line-height:1.6">Escreve as tuas opções acima ou escolhe um exemplo:<br><span style="color:var(--c6);font-weight:600">🍕 Refeições · ✈️ Destinos · 🎉 Fim de semana · 📺 Séries · ⚽ Desporto</span></span>'; return; }
 
     // Filter out last 2 results if there are enough options
     let available = lines.filter(l => !recentChoices.includes(l));
