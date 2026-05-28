@@ -2,8 +2,6 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3781802896099948"
-     crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gerador de Números Aleatórios Online | Lotaria, Dados, Moeda — numerossortear.com</title>
   <meta name="description" content="Gera números aleatórios online de forma gratuita. Chaves para Euromilhões e Totoloto, dados virtuais, lança moeda, gerador de senhas seguras e sorteio de opções. Sem registo, 100% grátis."/>
@@ -1135,11 +1133,12 @@ Francesinha</textarea>
     document.getElementById('choiceResult').innerHTML = '<span class="result-placeholder">Insere as opções e sorteia!</span>';
     const el = document.getElementById('choiceCount');
     if (el) el.textContent = '';
+    recentChoices.length = 0; // reset history on clear
   }
 
   const presets = {
     refeicoes:   "Pizza\nSushi\nHambúrguer\nTacos\nMassa\nFrancesinha\nSalada\nGrelhado",
-    destinos:    "Porto\nLisboa\nAlgarve\nMadeira\nAçores\nEspanha\nItália\nParis",
+    destinos:    "Porto\nLisboa\nAlgarve\nMadeira\nAçores\nEspanha\nItália\nParis\nTailândia\nJapão\nIndonésia",
     fins_semana: "Cinema\nJantar fora\nPasseio na natureza\nDia em casa\nPraia\nMuseu\nConcerto",
     series:      "Breaking Bad\nGame of Thrones\nStranger Things\nThe Office\nBlack Mirror\nPeaky Blinders",
     desporto:    "Futebol\nTénis\nBasquetebol\nNatação\nCiclismo\nGinásio\nCorrida"
@@ -1147,6 +1146,7 @@ Francesinha</textarea>
 
   function loadPreset(key) {
     document.getElementById('choiceInput').value = presets[key];
+    recentChoices.length = 0; // reset history when loading new preset
     updateChoiceCount();
   }
 
@@ -1156,15 +1156,29 @@ Francesinha</textarea>
     if (el) el.textContent = lines.length > 0 ? lines.length + ' opções' : '';
   }
 
+  // Track last 2 results to avoid repeating
+  const recentChoices = [];
+
   function escolhaAleatoria() {
     const lines = document.getElementById('choiceInput').value.split('\n').map(l=>l.trim()).filter(Boolean);
     const box   = document.getElementById('choiceResult');
     updateChoiceCount();
     if (!lines.length) { box.innerHTML = '<span style="color:var(--c3);font-size:0.85rem">Adiciona pelo menos uma opção</span>'; return; }
-    const idx = rand(0, lines.length - 1);
+
+    // Filter out last 2 results if there are enough options
+    let available = lines.filter(l => !recentChoices.includes(l));
+    if (available.length === 0) available = lines; // fallback if list is too short
+
+    const idx = rand(0, available.length - 1);
+    const chosen = available[idx];
+
+    // Update recent history (keep last 2)
+    recentChoices.push(chosen);
+    if (recentChoices.length > 2) recentChoices.shift();
+
     box.innerHTML = `<div style="text-align:center">
       <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px;font-weight:600">A sorte escolheu</div>
-      <div style="font-size:2.2rem;font-weight:700;color:var(--c6);animation:popIn .28s cubic-bezier(.34,1.56,.64,1);line-height:1.2;">${lines[idx]}</div>
+      <div style="font-size:2.2rem;font-weight:700;color:var(--c6);animation:popIn .28s cubic-bezier(.34,1.56,.64,1);line-height:1.2;">${chosen}</div>
       <div style="font-size:0.72rem;color:var(--muted);margin-top:8px;">de ${lines.length} opções</div>
     </div>`;
     updateStats();
