@@ -583,10 +583,11 @@
   <div class="logo">números<span>sortear</span></div>
   <nav>
     <a href="#numeros">Números</a>
-    <a href="#lotaria">Lotaria</a>
+    <a href="euromilhoes.html">Euromilhões</a>
+    <a href="totoloto.html">Totoloto</a>
+    <a href="eurodreams.html">EuroDreams</a>
     <a href="#dados">Dados</a>
     <a href="#moeda">Moeda</a>
-    <a href="#senha">Senha</a>
     <a href="#escolha">Escolha</a>
   </nav>
 </header>
@@ -601,6 +602,164 @@
 <!-- AD BANNER TOP -->
 <div class="ad-wrap">
   <div class="ad-banner">728 × 90 — Banner principal</div>
+</div>
+
+<!-- LOTARIAS PORTUGUESAS — Quick generators -->
+<style>
+  .lotarias-wrap { max-width: 1080px; margin: 28px auto 0; padding: 0 24px; }
+  .lotarias-header { text-align: center; margin-bottom: 22px; }
+  .lotarias-header .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fef6e4; color: var(--c2);
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.5px;
+    text-transform: uppercase; padding: 5px 14px; border-radius: 100px;
+    margin-bottom: 12px;
+  }
+  .lotarias-header h2 {
+    font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px;
+  }
+  .lotarias-header p { color: var(--muted); font-size: 0.9rem; }
+
+  .lotarias-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .lot-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow);
+    padding: 22px 20px;
+    text-align: center;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .lot-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.10); }
+
+  .lot-icon {
+    width: 56px; height: 56px; margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 14px;
+  }
+  .lot-icon.toto  { background: linear-gradient(135deg, #e6f7f2, #c5ebdc); }
+  .lot-icon.euro  { background: linear-gradient(135deg, #eef2ff, #d9e3fd); }
+  .lot-icon.dream { background: linear-gradient(135deg, #f3eeff, #ddccfa); }
+
+  .lot-name {
+    font-size: 1rem; font-weight: 700; color: var(--text);
+    margin-bottom: 2px;
+  }
+  .lot-rule {
+    font-size: 0.72rem; color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .lot-btn {
+    width: 100%;
+    padding: 9px 16px;
+    border: none; border-radius: var(--radius);
+    color: #fff; font-weight: 600; font-size: 0.82rem;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    transition: all .15s;
+  }
+  .lot-btn.toto  { background: var(--c5); }
+  .lot-btn.toto:hover  { background: #249a70; }
+  .lot-btn.euro  { background: var(--c1); }
+  .lot-btn.euro:hover  { background: #3d6ce6; }
+  .lot-btn.dream { background: var(--c4); }
+  .lot-btn.dream:hover { background: #8a5cd4; }
+
+  .lot-result {
+    margin-top: 14px;
+    min-height: 38px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.5;
+    word-break: break-word;
+  }
+  .lot-result .sep { color: var(--muted); margin: 0 4px; font-weight: 400; }
+  .lot-result .lucky { color: #e8903a; font-weight: 700; }
+  .lot-result .stars { color: #9b6fe8; font-weight: 700; }
+  .lot-result .dream { color: var(--c4); font-weight: 700; }
+  .lot-result .empty { color: var(--muted); font-family: 'Inter',sans-serif; font-size: 0.8rem; font-weight: 500; }
+
+  .lot-disclaimer {
+    max-width: 1080px; margin: 14px auto 0; padding: 0 24px;
+    font-size: 0.72rem; color: var(--muted); text-align: center; line-height: 1.6;
+  }
+  .lot-disclaimer strong { color: var(--text); }
+
+  @media (max-width: 720px) {
+    .lotarias-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="lotarias-wrap">
+  <div class="lotarias-header">
+    <div class="pill">⭐ Lotarias Portuguesas</div>
+    <h2>Gera a tua chave em <span style="color:var(--c2);">um clique</span></h2>
+    <p>Geradores rápidos para os jogos de lotaria portugueses mais populares</p>
+  </div>
+
+  <div class="lotarias-grid">
+
+    <!-- Totoloto card -->
+    <div class="lot-card">
+      <div class="lot-icon toto">
+        <!-- Original clover icon -->
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 16 C16 11 12 8 9 9 C6 10 6 14 9 15 C12 16 16 16 16 16 Z" fill="#2caa7e"/>
+          <path d="M16 16 C16 11 20 8 23 9 C26 10 26 14 23 15 C20 16 16 16 16 16 Z" fill="#34c290"/>
+          <path d="M16 16 C16 21 12 24 9 23 C6 22 6 18 9 17 C12 16 16 16 16 16 Z" fill="#34c290"/>
+          <path d="M16 16 C16 21 20 24 23 23 C26 22 26 18 23 17 C20 16 16 16 16 16 Z" fill="#2caa7e"/>
+          <rect x="15" y="16" width="2" height="9" rx="1" fill="#1a7a58"/>
+        </svg>
+      </div>
+      <div class="lot-name">Totoloto</div>
+      <div class="lot-rule">5 nº de 1-49 · Nº Sorte 1-13</div>
+      <button class="lot-btn toto" onclick="quickToto()">Gerar Chave</button>
+      <div class="lot-result" id="quickToto"><span class="empty">— ainda sem chave —</span></div>
+    </div>
+
+    <!-- Euromilhões card -->
+    <div class="lot-card">
+      <div class="lot-icon euro">
+        <!-- Original star + small star icon -->
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 4 L19 12 L27 12.5 L21 18 L23 26 L16 21.5 L9 26 L11 18 L5 12.5 L13 12 Z" fill="#4f7ef8"/>
+          <circle cx="24" cy="7" r="2.2" fill="#9b6fe8"/>
+          <circle cx="7" cy="24" r="1.6" fill="#9b6fe8"/>
+        </svg>
+      </div>
+      <div class="lot-name">Euromilhões</div>
+      <div class="lot-rule">5 nº de 1-50 · 2 Estrelas 1-12</div>
+      <button class="lot-btn euro" onclick="quickEuro()">Gerar Chave</button>
+      <div class="lot-result" id="quickEuro"><span class="empty">— ainda sem chave —</span></div>
+    </div>
+
+    <!-- EuroDreams card -->
+    <div class="lot-card">
+      <div class="lot-icon dream">
+        <!-- Original moon + star (dreams) icon -->
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 6 C16 6 11 11 11 17 C11 23 16 28 22 28 C18 26 15 22 15 17 C15 12 18 8 22 6 Z" fill="#9b6fe8"/>
+          <path d="M8 8 L9 11 L12 11 L9.8 13 L10.8 16 L8 14 L5.2 16 L6.2 13 L4 11 L7 11 Z" fill="#c4a8f5"/>
+          <circle cx="26" cy="22" r="1.5" fill="#c4a8f5"/>
+        </svg>
+      </div>
+      <div class="lot-name">EuroDreams</div>
+      <div class="lot-rule">6 nº de 1-40 · 1 Dream 1-5</div>
+      <button class="lot-btn dream" onclick="quickDream()">Gerar Chave</button>
+      <div class="lot-result" id="quickDream"><span class="empty">— ainda sem chave —</span></div>
+    </div>
+
+  </div>
+
+  <p class="lot-disclaimer">
+    <strong>Aviso:</strong> Este site é independente e não está associado, afiliado ou patrocinado pela Santa Casa da Misericórdia de Lisboa. As chaves geradas servem apenas para apostas em pontos oficiais. Jogar é proibido a menores de 18 anos.
+  </p>
 </div>
 
 <!-- MAIN -->
@@ -903,6 +1062,9 @@ Francesinha</textarea>
   <div class="logo">números<span>sortear</span></div>
   <p>Aleatoriedade real com <code style="color:var(--c1);font-size:0.75rem">crypto.getRandomValues</code> — 100% no browser.</p>
   <div class="footer-links">
+    <a href="euromilhoes.html">Euromilhões</a>
+    <a href="totoloto.html">Totoloto</a>
+    <a href="eurodreams.html">EuroDreams</a>
     <a href="privacidade.html">Privacidade</a>
     <a href="termos.html">Termos</a>
     <a href="mailto:andrecastroemail@gmail.com">Contacto</a>
@@ -1159,6 +1321,32 @@ Francesinha</textarea>
   // Track last 2 results to avoid repeating
   const recentChoices = [];
 
+  // ── Quick Lotaria generators ──
+  function quickToto() {
+    const nums = pickUnique(49, 5);
+    const lucky = rand(1, 13);
+    document.getElementById('quickToto').innerHTML =
+      nums.join('<span class="sep">-</span>') +
+      ' <span class="sep">+</span> <span class="lucky">' + lucky + '</span>';
+    updateStats();
+  }
+  function quickEuro() {
+    const nums  = pickUnique(50, 5);
+    const stars = pickUnique(12, 2);
+    document.getElementById('quickEuro').innerHTML =
+      nums.join('<span class="sep">-</span>') +
+      ' <span class="sep">+</span> <span class="stars">' + stars.join('-') + '</span>';
+    updateStats();
+  }
+  function quickDream() {
+    const nums = pickUnique(40, 6);
+    const dream = rand(1, 5);
+    document.getElementById('quickDream').innerHTML =
+      nums.join('<span class="sep">-</span>') +
+      ' <span class="sep">+</span> <span class="dream">' + dream + '</span>';
+    updateStats();
+  }
+
   function escolhaAleatoria() {
     const lines = document.getElementById('choiceInput').value.split('\n').map(l=>l.trim()).filter(Boolean);
     const box   = document.getElementById('choiceResult');
@@ -1180,8 +1368,31 @@ Francesinha</textarea>
       <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px;font-weight:600">A sorte escolheu</div>
       <div style="font-size:2.2rem;font-weight:700;color:var(--c6);animation:popIn .28s cubic-bezier(.34,1.56,.64,1);line-height:1.2;">${chosen}</div>
       <div style="font-size:0.72rem;color:var(--muted);margin-top:8px;">de ${lines.length} opções</div>
+      <button id="shareChoiceBtn" onclick="partilharEscolha('${chosen.replace(/'/g, "\\'")}')" style="display:inline-flex;align-items:center;gap:7px;margin-top:16px;background:var(--c6);border:none;color:#fff;font-size:0.8rem;font-weight:600;padding:9px 18px;border-radius:100px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;box-shadow:0 2px 8px rgba(232,80,122,0.25);letter-spacing:0.1px;" onmouseover="this.style.background='#d03868';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='var(--c6)';this.style.transform='translateY(0)'"><span id="shareIcon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></span><span id="shareTxt">Partilhar</span></button>
     </div>`;
     updateStats();
+  }
+
+  function partilharEscolha(resultado) {
+    const texto = `🎲 A sorte escolheu: ${resultado}!\n\nExperimenta tu também em numerossortear.com`;
+    const btn = document.getElementById('shareChoiceBtn');
+    // Try native share (mobile) first
+    if (navigator.share) {
+      navigator.share({
+        title: 'NúmerosSortear',
+        text: texto,
+        url: 'https://numerossortear.com'
+      }).catch(() => {});
+    } else {
+      // Desktop fallback — copy to clipboard
+      navigator.clipboard.writeText(texto + ' https://numerossortear.com').then(() => {
+        const txt = document.getElementById('shareTxt');
+        if (txt) {
+          txt.textContent = 'Copiado!';
+          setTimeout(() => txt.textContent = 'Partilhar', 2200);
+        }
+      });
+    }
   }
 
   document.addEventListener('keydown', e => {
