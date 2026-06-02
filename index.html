@@ -655,8 +655,25 @@
     margin-bottom: 14px;
   }
 
+  .lot-controls {
+    display: flex; gap: 6px; align-items: stretch;
+  }
+  .lot-select {
+    flex: 0 0 auto;
+    width: 78px;
+    padding: 9px 6px 9px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--faint);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem; font-weight: 600;
+    color: var(--text);
+    cursor: pointer; outline: none;
+    text-align: center;
+  }
+  .lot-select:focus { border-color: var(--c1); }
   .lot-btn {
-    width: 100%;
+    flex: 1;
     padding: 9px 16px;
     border: none; border-radius: var(--radius);
     color: #fff; font-weight: 600; font-size: 0.82rem;
@@ -684,6 +701,10 @@
   .lot-result .stars { color: #9b6fe8; font-weight: 700; }
   .lot-result .dream { color: var(--c4); font-weight: 700; }
   .lot-result .empty { color: var(--muted); font-family: 'Inter',sans-serif; font-size: 0.8rem; font-weight: 500; }
+  .lot-result .bet-row { padding: 5px 0; border-bottom: 1px dashed var(--border); }
+  .lot-result .bet-row:first-child { padding-top: 0; }
+  .lot-result .bet-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .lot-result .bet-num { display: inline-block; min-width: 22px; color: var(--muted); font-weight: 600; font-size: 0.74rem; text-align: left; }
 
   .play-link {
     display: inline-flex; align-items: center; gap: 5px;
@@ -734,7 +755,19 @@
       </div>
       <div class="lot-name">Totoloto</div>
       <div class="lot-rule">5 nº de 1-49 · Nº Sorte 1-13</div>
-      <button class="lot-btn toto" onclick="quickToto()">Gerar Chave</button>
+      <div class="lot-controls">
+        <select class="lot-select" id="totoQty" title="Número de apostas">
+          <option value="1">1 ap.</option>
+          <option value="2">2 ap.</option>
+          <option value="3">3 ap.</option>
+          <option value="4">4 ap.</option>
+          <option value="5">5 ap.</option>
+          <option value="6">6 ap.</option>
+          <option value="8">8 ap.</option>
+          <option value="10">10 ap.</option>
+        </select>
+        <button class="lot-btn toto" onclick="quickToto()">Gerar Chave</button>
+      </div>
       <div class="lot-result" id="quickToto"><span class="empty">— ainda sem chave —</span></div>
       <a href="https://www.jogossantacasa.pt/" target="_blank" rel="noopener" class="play-link">Jogar no site oficial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
     </div>
@@ -751,7 +784,19 @@
       </div>
       <div class="lot-name">Euromilhões</div>
       <div class="lot-rule">5 nº de 1-50 · 2 Estrelas 1-12</div>
-      <button class="lot-btn euro" onclick="quickEuro()">Gerar Chave</button>
+      <div class="lot-controls">
+        <select class="lot-select" id="euroQty" title="Número de apostas">
+          <option value="1">1 ap.</option>
+          <option value="2">2 ap.</option>
+          <option value="3">3 ap.</option>
+          <option value="4">4 ap.</option>
+          <option value="5">5 ap.</option>
+          <option value="6">6 ap.</option>
+          <option value="8">8 ap.</option>
+          <option value="10">10 ap.</option>
+        </select>
+        <button class="lot-btn euro" onclick="quickEuro()">Gerar Chave</button>
+      </div>
       <div class="lot-result" id="quickEuro"><span class="empty">— ainda sem chave —</span></div>
       <a href="https://www.jogossantacasa.pt/" target="_blank" rel="noopener" class="play-link">Jogar no site oficial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
     </div>
@@ -768,7 +813,19 @@
       </div>
       <div class="lot-name">EuroDreams</div>
       <div class="lot-rule">6 nº de 1-40 · 1 Dream 1-5</div>
-      <button class="lot-btn dream" onclick="quickDream()">Gerar Chave</button>
+      <div class="lot-controls">
+        <select class="lot-select" id="dreamQty" title="Número de apostas">
+          <option value="1">1 ap.</option>
+          <option value="2">2 ap.</option>
+          <option value="3">3 ap.</option>
+          <option value="4">4 ap.</option>
+          <option value="5">5 ap.</option>
+          <option value="6">6 ap.</option>
+          <option value="8">8 ap.</option>
+          <option value="10">10 ap.</option>
+        </select>
+        <button class="lot-btn dream" onclick="quickDream()">Gerar Chave</button>
+      </div>
       <div class="lot-result" id="quickDream"><span class="empty">— ainda sem chave —</span></div>
       <a href="https://www.jogossantacasa.pt/" target="_blank" rel="noopener" class="play-link">Jogar no site oficial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
     </div>
@@ -823,43 +880,6 @@
     <!-- AD INLINE -->
     <div class="ad-inline">468 × 60 — Publicidade</div>
 
-    <!-- ② LOTARIA -->
-    <div class="card" id="lotaria">
-      <div class="card-header">
-        <div class="card-icon c2">🏆</div>
-        <div>
-          <div class="card-title">Chave de Lotaria</div>
-          <div class="card-desc">Euromilhões, Totoloto e personalizado</div>
-        </div>
-      </div>
-      <div class="divider" style="margin-top:18px;"></div>
-      <div class="card-body">
-        <div class="controls">
-          <div class="field">
-            <label>Modo</label>
-            <select id="lottoMode" onchange="atualizarModo()" style="width:auto;min-width:150px;">
-              <option value="euro">Euromilhões</option>
-              <option value="toto">Totoloto</option>
-              <option value="5x50">5 de 50</option>
-              <option value="custom">Personalizado</option>
-            </select>
-          </div>
-          <div class="field" id="customFields" style="display:none">
-            <label>Bolas</label>
-            <input type="number" id="lottoBalls" value="49" style="width:80px"/>
-          </div>
-          <div class="field" id="customFields2" style="display:none">
-            <label>Escolher</label>
-            <input type="number" id="lottoPick" value="5" style="width:80px"/>
-          </div>
-          <button class="btn btn-c2" onclick="gerarLotaria()">Gerar Chave</button>
-        </div>
-        <div class="result-box" id="lottoResult">
-          <span class="result-placeholder">Clica para gerar chave</span>
-        </div>
-        <div class="history" id="lottoHistory"></div>
-      </div>
-    </div>
 
     <!-- ③ DADOS -->
     <div class="card" id="dados">
@@ -1037,7 +1057,6 @@ Francesinha</textarea>
 
   <div class="tools-grid">
     <div class="tool-info-card"><div class="icon">🎲</div><h3>Números Aleatórios</h3><p>Define intervalo e quantidade. Ideal para sorteios, rifas e seleção de participantes. Ativa "Únicos" para garantir que nenhum número se repete.</p></div>
-    <div class="tool-info-card"><div class="icon">🏆</div><h3>Chave de Lotaria</h3><p>Gera chaves para Euromilhões (5+2) e Totoloto (5+Nº Sorte), seguindo exatamente as regras oficiais dos jogos.</p></div>
     <div class="tool-info-card"><div class="icon">🎯</div><h3>Dados Virtuais</h3><p>D4 ao D100, até 6 dados em simultâneo com total calculado. Perfeito para D&D, Pathfinder e outros jogos de tabuleiro.</p></div>
     <div class="tool-info-card"><div class="icon">🪙</div><h3>Cara ou Coroa</h3><p>50/50 real. Lança uma moeda para decidir ou até 100 de uma vez para análise estatística.</p></div>
     <div class="tool-info-card"><div class="icon">🔐</div><h3>Senha Segura</h3><p>Gera senhas com entropia criptográfica real. Define comprimento, maiúsculas, números e símbolos.</p></div>
@@ -1133,70 +1152,13 @@ Francesinha</textarea>
     updateStats();
   }
 
-  /* ── Lotaria ── */
-  const lottoConfig = {
-    euro: { n: 50, pick: 5, stars: { n: 12, pick: 2 } },
-    toto: { n: 49, pick: 5, lucky: { n: 13, pick: 1 } },
-    '5x50': { n: 50, pick: 5 }
-  };
-
-  function atualizarModo() {
-    const mode = document.getElementById('lottoMode').value;
-    document.getElementById('customFields').style.display  = mode === 'custom' ? 'flex' : 'none';
-    document.getElementById('customFields2').style.display = mode === 'custom' ? 'flex' : 'none';
-  }
-
+  /* ── Utilitário para sortear únicos ── */
   function pickUnique(n, count) {
     const pool = Array.from({length: n}, (_, i) => i + 1);
     for (let i = pool.length - 1; i > 0; i--) {
       const j = rand(0, i); [pool[i], pool[j]] = [pool[j], pool[i]];
     }
     return pool.slice(0, count).sort((a, b) => a - b);
-  }
-
-  function gerarLotaria() {
-    const mode = document.getElementById('lottoMode').value;
-    const box  = document.getElementById('lottoResult');
-    const hist = document.getElementById('lottoHistory');
-    let html = '', histHTML = '';
-
-    if (mode === 'custom') {
-      const n    = parseInt(document.getElementById('lottoBalls').value) || 49;
-      const pick = parseInt(document.getElementById('lottoPick').value)  || 6;
-      const nums = pickUnique(n, pick);
-      html     = `<div class="lotto-row">${nums.map(n => `<div class="lotto-ball">${n}</div>`).join('')}</div>`;
-      histHTML = `Chave: <span>${nums.join(' - ')}</span>`;
-
-    } else if (mode === 'euro') {
-      const nums  = pickUnique(50, 5);
-      const stars = pickUnique(12, 2);
-      html = `<div class="lotto-row">
-        ${nums.map(n  => `<div class="lotto-ball">${n}</div>`).join('')}
-        <div class="lotto-sep">+</div>
-        ${stars.map(s => `<div class="lotto-ball estrela">${s}</div>`).join('')}
-      </div>`;
-      histHTML = `Chave: <span>${nums.join('-')}</span> &nbsp;+&nbsp; <span class="hist-stars">${stars.join(' - ')}</span>`;
-
-    } else if (mode === 'toto') {
-      const nums  = pickUnique(49, 5);
-      const lucky = rand(1, 13);
-      html = `<div class="lotto-row">
-        ${nums.map(n => `<div class="lotto-ball">${n}</div>`).join('')}
-        <div class="lotto-sep">+</div>
-        <div class="lotto-ball lucky">${lucky}</div>
-      </div>
-      <div class="lotto-lucky-label">Número da Sorte</div>`;
-      histHTML = `Chave: <span>${nums.join('-')}</span> &nbsp;+&nbsp; Nº Sorte: <span class="lucky-hist">${lucky}</span>`;
-
-    } else {
-      const nums = pickUnique(50, 5);
-      html     = `<div class="lotto-row">${nums.map(n => `<div class="lotto-ball">${n}</div>`).join('')}</div>`;
-      histHTML = `Chave: <span>${nums.join(' - ')}</span>`;
-    }
-
-    box.innerHTML  = html;
-    hist.innerHTML = histHTML;
-    updateStats();
   }
 
   /* ── Dados ── */
@@ -1339,29 +1301,41 @@ Francesinha</textarea>
   // Track last 2 results to avoid repeating
   const recentChoices = [];
 
-  // ── Quick Lotaria generators ──
+  // ── Quick Lotaria generators (suportam múltiplas apostas) ──
   function quickToto() {
-    const nums = pickUnique(49, 5);
-    const lucky = rand(1, 13);
-    document.getElementById('quickToto').innerHTML =
-      nums.join('<span class="sep">-</span>') +
-      ' <span class="sep">+</span> <span class="lucky">' + lucky + '</span>';
+    const qty = parseInt(document.getElementById('totoQty').value) || 1;
+    let html = '';
+    for (let i = 0; i < qty; i++) {
+      const nums = pickUnique(49, 5);
+      const lucky = rand(1, 13);
+      const prefix = qty > 1 ? `<span class="bet-num">${i+1}.</span> ` : '';
+      html += `<div class="bet-row">${prefix}${nums.join('<span class="sep">-</span>')} <span class="sep">+</span> <span class="lucky">${lucky}</span></div>`;
+    }
+    document.getElementById('quickToto').innerHTML = html;
     updateStats();
   }
   function quickEuro() {
-    const nums  = pickUnique(50, 5);
-    const stars = pickUnique(12, 2);
-    document.getElementById('quickEuro').innerHTML =
-      nums.join('<span class="sep">-</span>') +
-      ' <span class="sep">+</span> <span class="stars">' + stars.join('-') + '</span>';
+    const qty = parseInt(document.getElementById('euroQty').value) || 1;
+    let html = '';
+    for (let i = 0; i < qty; i++) {
+      const nums  = pickUnique(50, 5);
+      const stars = pickUnique(12, 2);
+      const prefix = qty > 1 ? `<span class="bet-num">${i+1}.</span> ` : '';
+      html += `<div class="bet-row">${prefix}${nums.join('<span class="sep">-</span>')} <span class="sep">+</span> <span class="stars">${stars.join('-')}</span></div>`;
+    }
+    document.getElementById('quickEuro').innerHTML = html;
     updateStats();
   }
   function quickDream() {
-    const nums = pickUnique(40, 6);
-    const dream = rand(1, 5);
-    document.getElementById('quickDream').innerHTML =
-      nums.join('<span class="sep">-</span>') +
-      ' <span class="sep">+</span> <span class="dream">' + dream + '</span>';
+    const qty = parseInt(document.getElementById('dreamQty').value) || 1;
+    let html = '';
+    for (let i = 0; i < qty; i++) {
+      const nums = pickUnique(40, 6);
+      const dream = rand(1, 5);
+      const prefix = qty > 1 ? `<span class="bet-num">${i+1}.</span> ` : '';
+      html += `<div class="bet-row">${prefix}${nums.join('<span class="sep">-</span>')} <span class="sep">+</span> <span class="dream">${dream}</span></div>`;
+    }
+    document.getElementById('quickDream').innerHTML = html;
     updateStats();
   }
 
