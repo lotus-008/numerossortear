@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gerador de Números Aleatórios Online | Lotaria, Dados, Moeda — numerossortear.com</title>
   <meta name="description" content="Gera números aleatórios online de forma gratuita. Chaves para Euromilhões e Totoloto, dados virtuais, lança moeda, gerador de senhas seguras e sorteio de opções. Sem registo, 100% grátis."/>
+  <link rel="alternate" hreflang="pt" href="https://numerossortear.com/"/>
+  <link rel="alternate" hreflang="es" href="https://numerossortear.com/es/"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
@@ -59,6 +61,11 @@
       letter-spacing: -0.3px;
     }
     .logo span { color: var(--c1); }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .lang-switch { display: flex; gap: 4px; border: 1px solid var(--border); border-radius: 100px; padding: 3px; }
+    .lang-btn { font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; text-decoration: none; transition: all .15s; color: var(--muted); }
+    .lang-btn.active { background: var(--c1); color: #fff; }
+    .lang-btn:not(.active):hover { background: var(--faint); color: var(--text); }
 
     nav { display: flex; gap: 6px; }
     nav a {
@@ -581,15 +588,20 @@
 <!-- HEADER -->
 <header>
   <div class="logo">números<span>sortear</span></div>
-  <nav>
-    <a href="#numeros">Números</a>
-    <a href="euromilhoes.html">Euromilhões</a>
-    <a href="totoloto.html">Totoloto</a>
-    <a href="eurodreams.html">EuroDreams</a>
-    <a href="#dados">Dados</a>
-    <a href="#moeda">Moeda</a>
-    <a href="#escolha">Escolha</a>
-  </nav>
+  <div class="header-right">
+    <nav>
+      <a href="#numeros">Números</a>
+      <a href="euromilhoes.html">Euromilhões</a>
+      <a href="totoloto.html">Totoloto</a>
+      <a href="eurodreams.html">EuroDreams</a>
+      <a href="#dados">Dados</a>
+      <a href="#escolha">Escolha</a>
+    </nav>
+    <div class="lang-switch">
+      <a href="/" class="lang-btn active">PT</a>
+      <a href="/es/" class="lang-btn">ES</a>
+    </div>
+  </div>
 </header>
 
 <!-- HERO -->
