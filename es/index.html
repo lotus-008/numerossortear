@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gerador de Números Aleatórios Online | Lotaria, Dados, Moeda — numerossortear.com</title>
+  <meta name="description" content="Gera números aleatórios online de forma gratuita. Chaves para Euromilhões e Totoloto, dados virtuais, lança moeda, gerador de senhas seguras e sorteio de opções. Sem registo, 100% grátis."/>
+  <link rel="alternate" hreflang="pt" href="https://numerossortear.com/"/>
+  <link rel="alternate" hreflang="es" href="https://numerossortear.com/es/"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:       #f7f8fa;
+      --white:    #ffffff;
+      --border:   #e4e7ed;
+      --text:     #1a1d23;
+      --muted:    #8a90a0;
+      --faint:    #f0f2f5;
+
+      /* Tool accent palette — soft, harmonious */
+      --c1: #4f7ef8;   /* blue    — números */
+      --c2: #e8a020;   /* amber   — lotaria */
+      --c3: #e05a3a;   /* coral   — dados   */
+      --c4: #9b6fe8;   /* violet  — moeda   */
+      --c5: #2caa7e;   /* teal    — senha   */
+      --c6: #e8507a;   /* rose    — escolha */
+
+      --radius: 6px;
+      --card-radius: 12px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.07);
+      --shadow-lg: 0 4px 24px rgba(0,0,0,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+    .logo span { color: var(--c1); }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .lang-switch { display: flex; gap: 4px; border: 1px solid var(--border); border-radius: 100px; padding: 3px; }
+    .lang-btn { font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; text-decoration: none; transition: all .15s; color: var(--muted); }
+    .lang-btn.active { background: var(--c1); color: #fff; }
+    .lang-btn:not(.active):hover { background: var(--faint); color: var(--text); }
+
+    nav { display: flex; gap: 6px; }
+    nav a {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      transition: background 0.15s, color 0.15s;
+    }
+    nav a:hover { background: var(--faint); color: var(--text); }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 40px 48px;
+      text-align: center;
+    }
+
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #eef2ff;
+      color: var(--c1);
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .hero h1 span { color: var(--c1); }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ── Ad banner ── */
+    .ad-banner {
+      background: var(--white);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      height: 90px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 0.7rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      position: relative; max-width: 728px; margin: 0 auto;
+    }
+    .ad-banner::before {
+      content: 'Publicidade';
+      position: absolute; top: -9px; left: 14px;
+      background: var(--white); padding: 0 6px;
+      font-size: 0.6rem; color: var(--muted);
+    }
+    .ad-wrap { padding: 28px 40px 0; }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 1080px;
+      margin: 32px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* ── Cards ── */
+    .tools { display: flex; flex-direction: column; gap: 16px; }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 24px 0;
+    }
+
+    .card-icon {
+      width: 38px; height: 38px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+
+    .card-icon.c1 { background: #eef2ff; }
+    .card-icon.c2 { background: #fef6e4; }
+    .card-icon.c3 { background: #fdf1ee; }
+    .card-icon.c4 { background: #f3eeff; }
+    .card-icon.c5 { background: #e6f7f2; }
+    .card-icon.c6 { background: #fdedf2; }
+
+    .card-title { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .card-desc  { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+    .card-body { padding: 20px 24px 24px; }
+
+    .divider {
+      height: 1px; background: var(--border); margin: 0 24px;
+    }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      align-items: flex-end; margin-bottom: 18px;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label {
+      font-size: 0.7rem; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .field input[type="number"],
+    .field input[type="text"],
+    .field select {
+      background: var(--faint);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 9px 12px;
+      border-radius: var(--radius);
+      width: 110px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .field input:focus, .field select:focus {
+      border-color: var(--c1);
+      box-shadow: 0 0 0 3px rgba(79,126,248,0.12);
+    }
+
+    .checkbox-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.84rem; color: var(--muted); cursor: pointer;
+      user-select: none;
+    }
+    .checkbox-label input[type="checkbox"] {
+      accent-color: var(--c1); width: 15px; height: 15px;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; border: none;
+      transition: all 0.15s;
+      letter-spacing: 0.1px;
+    }
+
+    .btn-c1 { background: var(--c1); color: #fff; box-shadow: 0 2px 8px rgba(79,126,248,0.25); }
+    .btn-c1:hover { background: #3d6ce6; transform: translateY(-1px); }
+
+    .btn-c2 { background: var(--c2); color: #fff; box-shadow: 0 2px 8px rgba(232,160,32,0.25); }
+    .btn-c2:hover { background: #d08e10; transform: translateY(-1px); }
+
+    .btn-c3 { background: var(--c3); color: #fff; box-shadow: 0 2px 8px rgba(224,90,58,0.25); }
+    .btn-c3:hover { background: #c94a2a; transform: translateY(-1px); }
+
+    .btn-c4 { background: var(--c4); color: #fff; box-shadow: 0 2px 8px rgba(155,111,232,0.25); }
+    .btn-c4:hover { background: #8a5cd4; transform: translateY(-1px); }
+
+    .btn-c5 { background: var(--c5); color: #fff; box-shadow: 0 2px 8px rgba(44,170,126,0.25); }
+    .btn-c5:hover { background: #249a70; transform: translateY(-1px); }
+
+    .btn-c6 { background: var(--c6); color: #fff; box-shadow: 0 2px 8px rgba(232,80,122,0.25); }
+    .btn-c6:hover { background: #d03868; transform: translateY(-1px); }
+
+    .btn:active { transform: translateY(0); }
+
+    .btn-ghost {
+      background: var(--faint);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { color: var(--text); background: #e8eaee; }
+
+    /* ── Result box ── */
+    .result-box {
+      background: var(--faint);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 22px;
+      min-height: 76px;
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .result-placeholder {
+      color: var(--muted); font-size: 0.82rem;
+      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;
+    }
+
+    .result-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 3.8rem; font-weight: 500;
+      color: var(--c1); line-height: 1;
+      animation: popIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .result-tag {
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--c1);
+      font-family: 'DM Mono', monospace;
+      font-size: 1.15rem; font-weight: 500;
+      padding: 8px 16px; border-radius: var(--radius);
+      animation: popIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: var(--shadow);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.6); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    .history {
+      margin-top: 10px; font-size: 0.75rem; color: var(--muted);
+    }
+    .history span {
+      font-family: 'DM Mono', monospace;
+      color: var(--c1); font-size: 0.78rem;
+    }
+    .lucky-hist { color: #e8903a !important; }
+    .hist-stars { color: #9b6fe8 !important; font-weight: 600; }
+
+    /* ── Lottery ── */
+    .lotto-row {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      justify-content: center; align-items: center;
+    }
+    .lotto-sep {
+      font-size: 1.4rem; color: var(--muted); padding: 0 2px; line-height: 1;
+    }
+    .lotto-lucky-label {
+      width: 100%; text-align: right;
+      font-size: 0.62rem; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--muted); margin-top: 4px;
+    }
+    .lotto-ball {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-weight: 700; font-size: 0.95rem;
+      color: white; flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      animation: popIn 0.28s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .lotto-row .lotto-ball:nth-child(1) { animation-delay:0.00s; background: #4f7ef8; }
+    .lotto-row .lotto-ball:nth-child(2) { animation-delay:0.07s; background: #5b8ff5; }
+    .lotto-row .lotto-ball:nth-child(3) { animation-delay:0.14s; background: #6a9ef2; }
+    .lotto-row .lotto-ball:nth-child(4) { animation-delay:0.21s; background: #7aadee; }
+    .lotto-row .lotto-ball:nth-child(5) { animation-delay:0.28s; background: #8abceb; }
+    .lotto-row .lotto-ball:nth-child(6) { animation-delay:0.35s; background: #9bcbe8; }
+    .lotto-ball.estrela {
+      background: #9b6fe8;
+      border: 2px solid #c4a8f5;
+      width: 44px; height: 44px; font-size: 0.88rem;
+      animation-delay: 0.42s;
+    }
+    .lotto-row .lotto-ball.estrela:last-child { animation-delay: 0.49s; }
+    .lotto-ball.lucky {
+      width: 56px; height: 56px; font-size: 1.1rem;
+      background: #e8903a;
+      border: 2px solid #f5c080;
+      animation-delay: 0.42s;
+      box-shadow: 0 2px 12px rgba(232,144,58,0.35);
+    }
+
+    /* ── Dice ── */
+    .dice-display { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .die {
+      width: 64px; height: 64px;
+      background: white; border-radius: 10px;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      padding: 9px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+      border: 1px solid #ddd;
+      animation: rollDie 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes rollDie {
+      from { transform: rotate(-90deg) scale(0.5); opacity: 0; }
+      to   { transform: rotate(0deg) scale(1); opacity: 1; }
+    }
+    .dot {
+      width: 8px; height: 8px;
+      background: var(--c3);
+      border-radius: 50%;
+      justify-self: center; align-self: center;
+    }
+
+    /* ── Coin ── */
+    /* Neutral spinning coin — shown during animation */
+    .coin-spin {
+      width: 90px; height: 90px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+      background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      animation: flipCoin 1.2s ease-in-out forwards;
+    }
+    /* Result coin — hidden until spin ends */
+    .coin-result {
+      width: 90px; height: 90px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+      opacity: 0;
+      animation: revealCoin 0.4s ease forwards;
+      animation-delay: 1.2s;
+    }
+    .coin-result.heads { background: linear-gradient(135deg, #ffd166, #f4a261); box-shadow: 0 4px 16px rgba(255,180,50,0.35); }
+    .coin-result.tails { background: linear-gradient(135deg, #cbd5e1, #94a3b8); box-shadow: 0 4px 16px rgba(148,163,184,0.35); }
+    @keyframes flipCoin {
+      0%   { transform: scaleX(1); opacity: 1; }
+      25%  { transform: scaleX(0); opacity: 1; }
+      50%  { transform: scaleX(1); opacity: 1; }
+      75%  { transform: scaleX(0); opacity: 1; }
+      99%  { transform: scaleX(1); opacity: 1; }
+      100% { transform: scaleX(0); opacity: 0; width: 0; margin: 0; padding: 0; }
+    }
+    @keyframes revealCoin {
+      from { opacity: 0; transform: scaleX(0); }
+      to   { opacity: 1; transform: scaleX(1); }
+    }
+    .coin-label {
+      opacity: 0;
+      animation: fadeInLabel 0.35s ease forwards;
+      animation-delay: 1.2s;
+    }
+    @keyframes fadeInLabel {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Password ── */
+    .pass-output {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.1rem; color: var(--c5);
+      word-break: break-all; text-align: center;
+      animation: popIn 0.25s ease;
+    }
+    .preset-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--white);
+      border: 1px solid #f9c0d0;
+      color: var(--c6);
+      font-size: 0.76rem; font-weight: 600;
+      padding: 5px 12px; border-radius: 100px;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: all 0.15s;
+    }
+    .preset-btn:hover {
+      background: #fde8ef; border-color: var(--c6);
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none; width: 100%;
+      height: 4px; background: var(--border);
+      border-radius: 2px; outline: none; margin-top: 8px;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--c5); cursor: pointer;
+      box-shadow: 0 0 6px rgba(44,170,126,0.4);
+    }
+
+    /* ── Copy button ── */
+    .copy-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--faint); border: 1px solid var(--border);
+      color: var(--muted); font-size: 0.75rem;
+      padding: 6px 14px; border-radius: var(--radius); cursor: pointer;
+      font-family: 'Inter', sans-serif; transition: all 0.15s; margin-top: 10px;
+    }
+    .copy-btn:hover { color: var(--text); border-color: #ccc; }
+
+    /* ── Inline ads ── */
+    .ad-inline {
+      background: var(--white);
+      border: 1px dashed var(--border);
+      border-radius: 8px; height: 90px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 0.7rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      position: relative;
+    }
+    .ad-inline::before {
+      content: 'Publicidade'; position: absolute;
+      top: -9px; left: 14px;
+      background: var(--bg); padding: 0 6px;
+      font-size: 0.6rem; color: var(--muted);
+    }
+
+    /* ── Sidebar ── */
+    .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+    .ad-sidebar {
+      background: var(--white); border: 1px dashed var(--border);
+      border-radius: 8px; height: 250px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 0.7rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      position: relative;
+    }
+    .ad-sidebar::before {
+      content: 'Publicidade'; position: absolute;
+      top: -9px; left: 14px;
+      background: var(--bg); padding: 0 6px;
+      font-size: 0.6rem; color: var(--muted);
+    }
+
+    .info-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 20px;
+    }
+    .info-card h3 {
+      font-size: 0.72rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px;
+    }
+    .info-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      margin-bottom: 10px; font-size: 0.82rem; color: var(--muted);
+    }
+    .info-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--c1); flex-shrink: 0; margin-top: 7px;
+    }
+
+    /* ── Rich content ── */
+    .rich-section {
+      max-width: 1080px; margin: 0 auto; padding: 0 24px 60px;
+    }
+    .rich-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 36px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+    .rich-card h2 {
+      font-size: 1.25rem; font-weight: 700; color: var(--text);
+      margin-bottom: 16px;
+    }
+    .rich-card h2 span { color: var(--c1); }
+    .rich-card p { color: #5a6072; font-size: 0.9rem; line-height: 1.75; margin-bottom: 12px; }
+    .rich-card p:last-child { margin-bottom: 0; }
+
+    .tools-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap: 16px; margin-bottom: 20px;
+    }
+    .tool-info-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--card-radius); padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .tool-info-card .icon { font-size: 1.6rem; margin-bottom: 10px; }
+    .tool-info-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .tool-info-card p { color: #5a6072; font-size: 0.83rem; line-height: 1.65; }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 22px 0;
+    }
+    .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .faq-item h3 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .faq-item p { color: #5a6072; font-size: 0.87rem; line-height: 1.7; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 24px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    footer p { font-size: 0.78rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--muted); font-size: 0.78rem; text-decoration: none; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      header { padding: 0 16px; }
+      nav { display: none; }
+      .hero { padding: 36px 20px 30px; }
+      .container { grid-template-columns: 1fr; padding: 0 16px; }
+      .sidebar { display: none; }
+      .ad-wrap { padding: 20px 16px 0; }
+      .rich-section { padding: 0 16px 40px; }
+      footer { padding: 20px 16px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">números<span>sortear</span></div>
+  <div class="header-right">
+    <nav>
+      <a href="#numeros">Números</a>
+      <a href="euromilhoes.html">Euromilhões</a>
+      <a href="totoloto.html">Totoloto</a>
+      <a href="eurodreams.html">EuroDreams</a>
+      <a href="#dados">Dados</a>
+      <a href="#escolha">Escolha</a>
+    </nav>
+    <div class="lang-switch">
+      <a href="/" class="lang-btn active">PT</a>
+      <a href="/es/" class="lang-btn">ES</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-pill">⚡ Ferramentas gratuitas de aleatoriedade</div>
+  <h1>Gera <span>números aleatórios</span><br>— e não só 🍕 ✈️ 🎯</h1>
+  <p>Euromilhões, Totoloto, dados, moeda, senhas — e sorteia qualquer decisão da tua vida. Tudo grátis, sem registo.</p>
+</div>
+
+<!-- AD BANNER TOP -->
+<div class="ad-wrap">
+  <div class="ad-banner">728 × 90 — Banner principal</div>
+</div>
+
+<!-- LOTARIAS PORTUGUESAS — Quick generators -->
+<style>
+  .lotarias-wrap { max-width: 1080px; margin: 28px auto 0; padding: 0 24px; }
+  .lotarias-header { text-align: center; margin-bottom: 22px; }
+  .lotarias-header .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fef6e4; color: var(--c2);
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.5px;
+    text-transform: uppercase; padding: 5px 14px; border-radius: 100px;
+    margin-bottom: 12px;
+  }
+  .lotarias-header h2 {
+    font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px;
+  }
+  .lotarias-header p { color: var(--muted); font-size: 0.9rem; }
+
+  .lotarias-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .lot-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow);
+    padding: 22px 20px;
+    text-align: center;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .lot-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.10); }
+
+  .lot-icon {
+    width: 56px; height: 56px; margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 14px;
+  }
+  .lot-icon.toto  { background: linear-gradient(135deg, #e6f7f2, #c5ebdc); }
+  .lot-icon.euro  { background: linear-gradient(135deg, #eef2ff, #d9e3fd); }
+  .lot-icon.dream { background: linear-gradient(135deg, #f3eeff, #ddccfa); }
+
+  .lot-name {
+    font-size: 1rem; font-weight: 700; color: var(--text);
+    margin-bottom: 2px;
+  }
+  .lot-rule {
+    font-size: 0.72rem; color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .lot-controls {
+    display: flex; gap: 6px; align-items: stretch;
+  }
+  .lot-select {
+    flex: 0 0 auto;
+    width: 78px;
+    padding: 9px 6px 9px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--faint);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem; font-weight: 600;
+    color: var(--text);
+    cursor: pointer; outline: none;
+    text-align: center;
+  }
+  .lot-select:focus { border-color: var(--c1); }
+  .lot-btn {
+    flex: 1;
+    padding: 9px 16px;
+    border: none; border-radius: var(--radius);
+    color: #fff; font-weight: 600; font-size: 0.82rem;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    transition: all .15s;
+  }
+  .lot-btn.toto  { background: var(--c5); }
+  .lot-btn.toto:hover  { background: #249a70; }
+  .lot-btn.euro  { background: var(--c1); }
+  .lot-btn.euro:hover  { background: #3d6ce6; }
+  .lot-btn.dream { background: var(--c4); }
+  .lot-btn.dream:hover { background: #8a5cd4; }
+
+  .lot-result {
+    margin-top: 14px;
+    min-height: 38px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.5;
+    word-break: break-word;
+  }
+  .lot-result .sep { color: var(--muted); margin: 0 4px; font-weight: 400; }
+  .lot-result .lucky { color: #e8903a; font-weight: 700; }
+  .lot-result .stars { color: #9b6fe8; font-weight: 700; }
+  .lot-result .dream { color: var(--c4); font-weight: 700; }
+  .lot-result .empty { color: var(--muted); font-family: 'Inter',sans-serif; font-size: 0.8rem; font-weight: 500; }
+  .lot-result .bet-row { padding: 5px 0; border-bottom: 1px dashed var(--border); }
+  .lot-result .bet-row:first-child { padding-top: 0; }
+  .lot-result .bet-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .lot-result .bet-num { display: inline-block; min-width: 22px; color: var(--muted); font-weight: 600; font-size: 0.74rem; text-align: left; }
+
+  .play-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 0.74rem; font-weight: 600;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    transition: all .15s;
+  }
+  .play-link:hover { color: var(--text); border-color: var(--muted); background: var(--faint); }
+  .play-link svg { width: 11px; height: 11px; opacity: 0.7; }
+
+  .lot-disclaimer {
+    max-width: 1080px; margin: 14px auto 0; padding: 0 24px;
+    font-size: 0.72rem; color: var(--muted); text-align: center; line-height: 1.6;
+  }
+  .lot-disclaimer strong { color: var(--text); }
+
+  @media (max-width: 720px) {
+    .lotarias-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="lotarias-wrap">
+  <div class="lotarias-header">
+    <div class="pill">⭐ Lotarias Portuguesas</div>
+    <h2>Gera a tua chave em <span style="color:var(--c2);">um clique</span></h2>
+    <p>Geradores rápidos para os jogos de lotaria portugueses mais populares</p>
+  </div>
+
+  <div class="lotarias-grid">
+
+    <!-- Totoloto card -->
+    <div class="lot-card">
+      <div class="lot-icon toto">
+        <!-- Original clover icon -->
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 16 C16 11 12 8 9 9 C6 10 6 14 9 15 C12 16 16 16 16 16 Z" fill="#2caa7e"/>
+          <path d="M16 16 C16 11 20 8 23 9 C26 10 26 14 23 15 C20 16 16 16 16 16 Z" fill="#34c290"/>
+          <path d="M16 16 C16 21 12 24 9 23 C6 22 6 18 9 17 C12 16 16 16 16 16 Z" fill="#34c290"/>
+          <path d="M16 16 C16 21 20 24 23 23 C26 22 26 18 23 17 C20 16 16 16 16 16 Z" fill="#2caa7e"/>
+          <rect x="15" y="16" width="2" height="9" rx="1" fill="#1a7a58"/>
+        </svg>
+      </div>
+      <div class="lot-name">Totoloto</div>
+      <div class="lot-rule">5 nº de 1-49 · Nº Sorte 1-13</div>
+      <div class="lot-controls">
+        <select class="lot-select" id="totoQty" title="Número de apostas">
+          <option value="1">1 ap.</option>
+          <option value="2">2 ap.</option>
+          <option value="3">3 ap.</option>
+          <option value="4">4 ap.</option>
+          <option value="5">5 ap.</option>
+          <option value="6">6 ap.</option>
+          <option value="8">8 ap.</option>
+          <option value="10">10 ap.</option>
+        </select>
+        <button class="lot-btn toto" onclick="quickToto()">Gerar Chave</button>
+      </div>
+      <div class="lot-result" id="quickToto"><span class="empty">— ainda sem chave —</span></div>
+      <a href="https://www.jogossantacasa.pt/" target="_blank" rel="noopener" class="play-link">Jogar no site oficial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+    </div>
+
+    <!-- Euromilhões card -->
+    <div class="lot-card">
+      <div class="lot-icon euro">
+        <!-- Original star + small star icon -->
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 4 L19 12 L27 12.5 L21 18 L23 26 L16 21.5 L9 26 L11 18 L5 12.5 L13 12 Z" fill="#4f7ef8"/>
+          <circle cx="24" cy="7" r="2.2" fill="#9b6fe8"/>
+          <circle cx="7" cy="24" r="1.6" fill="#9b6fe8"/>
+        </svg>
+      </div>
+      <div class="lot-name">Euromilhões</div>
+      <div class="lot-rule">5 nº de 1-50 · 2 Estrelas 1-12</div>
+      <div class="lot-controls">
+        <select class="lot-select" id="euroQty" title="Número de apostas">
+          <option value="1">1 ap.</option>
+          <option value="2">2 ap.</option>
+          <option value="3">3 ap.</option>
+          <option value="4">4 ap.</option>
+          <option value="5">5 ap.</option>
+          <option value="6">6 ap.</option>
+          <option value="8">8 ap.</option>
+          <option value="10">10 ap.</option>
+        </select>
+        <button class="lot-btn euro" onclick="quickEuro()">Gerar Chave</button>
+      </div>
+      <div class="lot-result" id="quickEuro"><span class="empty">— ainda sem chave —</span></div>
+      <a href="https://www.jogossantacasa.pt/" target="_blank" rel="noopener" class="play-link">Jogar no site oficial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+    </div>
+
+    <!-- EuroDreams card -->
+    <div class="lot-card">
+      <div class="lot-icon dream">
+        <!-- Original moon + star (dreams) icon -->
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 6 C16 6 11 11 11 17 C11 23 16 28 22 28 C18 26 15 22 15 17 C15 12 18 8 22 6 Z" fill="#9b6fe8"/>
+          <path d="M8 8 L9 11 L12 11 L9.8 13 L10.8 16 L8 14 L5.2 16 L6.2 13 L4 11 L7 11 Z" fill="#c4a8f5"/>
+          <circle cx="26" cy="22" r="1.5" fill="#c4a8f5"/>
+        </svg>
+      </div>
+      <div class="lot-name">EuroDreams</div>
+      <div class="lot-rule">6 nº de 1-40 · 1 Dream 1-5</div>
+      <div class="lot-controls">
+        <select class="lot-select" id="dreamQty" title="Número de apostas">
+          <option value="1">1 ap.</option>
+          <option value="2">2 ap.</option>
+          <option value="3">3 ap.</option>
+          <option value="4">4 ap.</option>
+          <option value="5">5 ap.</option>
+          <option value="6">6 ap.</option>
+          <option value="8">8 ap.</option>
+          <option value="10">10 ap.</option>
+        </select>
+        <button class="lot-btn dream" onclick="quickDream()">Gerar Chave</button>
+      </div>
+      <div class="lot-result" id="quickDream"><span class="empty">— ainda sem chave —</span></div>
+      <a href="https://www.jogossantacasa.pt/" target="_blank" rel="noopener" class="play-link">Jogar no site oficial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+    </div>
+
+  </div>
+
+  <p class="lot-disclaimer">
+    <strong>Aviso:</strong> Este site é independente e não está associado, afiliado ou patrocinado pela Santa Casa da Misericórdia de Lisboa. As chaves geradas servem apenas para apostas em pontos oficiais. Jogar é proibido a menores de 18 anos.
+  </p>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+  <div class="tools">
+
+    <!-- ① NÚMERO ALEATÓRIO -->
+    <div class="card" id="numeros">
+      <div class="card-header">
+        <div class="card-icon c1">🎲</div>
+        <div>
+          <div class="card-title">Número Aleatório</div>
+          <div class="card-desc">Gera um ou vários números entre um intervalo</div>
+        </div>
+      </div>
+      <div class="divider" style="margin-top:18px;"></div>
+      <div class="card-body">
+        <div class="controls">
+          <div class="field">
+            <label>Mínimo</label>
+            <input type="number" id="numMin" value="1"/>
+          </div>
+          <div class="field">
+            <label>Máximo</label>
+            <input type="number" id="numMax" value="100"/>
+          </div>
+          <div class="field">
+            <label>Quantidade</label>
+            <input type="number" id="numQty" value="1" min="1" max="20"/>
+          </div>
+          <label class="checkbox-label">
+            <input type="checkbox" id="numUnique"/> Únicos
+          </label>
+          <button class="btn btn-c1" onclick="gerarNumero()">Sortear</button>
+        </div>
+        <div class="result-box" id="numResult">
+          <span class="result-placeholder">Clica para sortear</span>
+        </div>
+        <div class="history" id="numHistory"></div>
+      </div>
+    </div>
+
+    <!-- AD INLINE -->
+    <div class="ad-inline">468 × 60 — Publicidade</div>
+
+
+    <!-- ③ DADOS -->
+    <div class="card" id="dados">
+      <div class="card-header">
+        <div class="card-icon c3">🎯</div>
+        <div>
+          <div class="card-title">Lançar Dados</div>
+          <div class="card-desc">D4, D6, D8, D10, D12, D20 e D100</div>
+        </div>
+      </div>
+      <div class="divider" style="margin-top:18px;"></div>
+      <div class="card-body">
+        <div class="controls">
+          <div class="field">
+            <label>Tipo de Dado</label>
+            <select id="diceType" style="width:auto;min-width:160px;">
+              <option value="6">D6 — Clássico</option>
+              <option value="4">D4</option>
+              <option value="8">D8</option>
+              <option value="10">D10</option>
+              <option value="12">D12</option>
+              <option value="20">D20</option>
+              <option value="100">D100</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Quantidade</label>
+            <input type="number" id="diceQty" value="2" min="1" max="6" style="width:80px"/>
+          </div>
+          <button class="btn btn-c3" onclick="lancarDados()">Lançar</button>
+        </div>
+        <div class="result-box" id="diceResult">
+          <span class="result-placeholder">Lança os dados!</span>
+        </div>
+        <div style="margin-top:10px;font-size:0.8rem;color:var(--muted)" id="diceTotal"></div>
+      </div>
+    </div>
+
+    <!-- ④ MOEDA -->
+    <div class="card" id="moeda">
+      <div class="card-header">
+        <div class="card-icon c4">🪙</div>
+        <div>
+          <div class="card-title">Lançar Moeda</div>
+          <div class="card-desc">Cara ou coroa — probabilidade 50/50</div>
+        </div>
+      </div>
+      <div class="divider" style="margin-top:18px;"></div>
+      <div class="card-body">
+        <div class="controls">
+          <div class="field">
+            <label>Lançamentos</label>
+            <input type="number" id="coinQty" value="1" min="1" max="100"/>
+          </div>
+          <button class="btn btn-c4" onclick="lancarMoeda()">Lançar</button>
+        </div>
+        <div class="result-box" id="coinResult">
+          <span class="result-placeholder">Lança a moeda!</span>
+        </div>
+        <div style="margin-top:10px;font-size:0.78rem;color:var(--muted)" id="coinStats"></div>
+      </div>
+    </div>
+
+    <!-- AD INLINE 2 -->
+    <div class="ad-inline">468 × 60 — Publicidade</div>
+
+    <!-- ⑤ SENHA -->
+    <div class="card" id="senha">
+      <div class="card-header">
+        <div class="card-icon c5">🔐</div>
+        <div>
+          <div class="card-title">Gerador de Senha</div>
+          <div class="card-desc">Senha segura e aleatória</div>
+        </div>
+      </div>
+      <div class="divider" style="margin-top:18px;"></div>
+      <div class="card-body">
+        <div class="controls" style="flex-direction:column;align-items:flex-start;gap:12px;">
+          <div class="field" style="width:100%;max-width:400px">
+            <label>Comprimento: <span id="passLenLabel">16</span> caracteres</label>
+            <input type="range" id="passLen" min="6" max="64" value="16"
+              oninput="document.getElementById('passLenLabel').textContent=this.value"/>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;">
+            <label class="checkbox-label"><input type="checkbox" id="passUpper" checked/> Maiúsculas (A-Z)</label>
+            <label class="checkbox-label"><input type="checkbox" id="passLower" checked/> Minúsculas (a-z)</label>
+            <label class="checkbox-label"><input type="checkbox" id="passNum" checked/> Números (0-9)</label>
+            <label class="checkbox-label"><input type="checkbox" id="passSym" checked/> Símbolos</label>
+          </div>
+          <button class="btn btn-c5" onclick="gerarSenha()">Gerar Senha</button>
+        </div>
+        <div class="result-box" id="passResult">
+          <span class="result-placeholder">Clica para gerar</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑥ ESCOLHA -->
+    <div class="card" id="escolha" style="border-color:#f9c0d0;border-width:1.5px;">
+      <div style="background:linear-gradient(135deg,#fff0f4,#fff8fa);padding:20px 24px 0;border-radius:12px 12px 0 0;">
+        <div class="card-header" style="padding:0 0 16px 0;">
+          <div class="card-icon c6" style="background:#fde8ef;">🔀</div>
+          <div>
+            <div class="card-title">Escolha Aleatória</div>
+            <div class="card-desc">Não consegues decidir? Deixa o acaso escolher por ti</div>
+          </div>
+        </div>
+        <!-- Quick scenario buttons -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px;padding-bottom:18px;">
+          <span style="font-size:0.7rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;align-self:center;margin-right:4px;">Exemplos:</span>
+          <button class="preset-btn" onclick="loadPreset('refeicoes')">🍕 Refeições</button>
+          <button class="preset-btn" onclick="loadPreset('destinos')">✈️ Destinos</button>
+          <button class="preset-btn" onclick="loadPreset('fins_semana')">🎉 Fim de semana</button>
+          <button class="preset-btn" onclick="loadPreset('series')">📺 Séries</button>
+          <button class="preset-btn" onclick="loadPreset('desporto')">⚽ Desporto</button>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="card-body">
+        <div class="controls" style="flex-direction:column;align-items:flex-start;gap:12px;">
+          <div class="field" style="width:100%">
+            <label>As tuas opções (uma por linha)</label>
+            <textarea id="choiceInput" rows="6" style="width:100%;background:var(--faint);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;color:var(--text);font-family:'Inter',sans-serif;font-size:0.88rem;outline:none;resize:vertical;line-height:1.7;transition:border-color .15s;" onfocus="this.style.borderColor='var(--c6)'" onblur="this.style.borderColor='var(--border)'" oninput="updateChoiceCount()">Pizza
+Sushi
+Hambúrguer
+Tacos
+Massa
+Francesinha</textarea>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;width:100%;">
+            <button class="btn btn-c6" onclick="escolhaAleatoria()" style="flex-shrink:0;">🎲 Sortear opção</button>
+            <button class="btn btn-ghost" onclick="limparEscolha()" style="font-size:0.78rem;">Limpar</button>
+            <span id="choiceCount" style="margin-left:auto;font-size:0.75rem;color:var(--muted);"></span>
+          </div>
+        </div>
+        <div class="result-box" id="choiceResult" style="margin-top:16px;min-height:90px;background:linear-gradient(135deg,#fff0f4,#fff8fa);border-color:#f9c0d0;">
+          <span style="color:var(--muted);font-size:0.85rem;line-height:1.6">Escreve as tuas opções acima ou escolhe um exemplo:<br><span style="color:var(--c6);font-weight:600">🍕 Refeições · ✈️ Destinos · 🎉 Fim de semana · 📺 Séries · ⚽ Desporto</span></span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tools -->
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="ad-sidebar">300 × 250 — Sidebar</div>
+
+    <div class="info-card">
+      <h3>Como usar</h3>
+      <div class="info-item"><div class="info-dot"></div><span>Define o intervalo e clica Sortear para números aleatórios.</span></div>
+      <div class="info-item"><div class="info-dot"></div><span>Ativa "Únicos" para sorteios sem repetição.</span></div>
+      <div class="info-item"><div class="info-dot"></div><span>Euromilhões gera 5 números + 2 estrelas.</span></div>
+      <div class="info-item"><div class="info-dot"></div><span>Totoloto gera 5 números + Nº da Sorte.</span></div>
+      <div class="info-item"><div class="info-dot" style="background:var(--c5)"></div><span>Senha usa criptografia real do browser.</span></div>
+    </div>
+
+    <div class="ad-sidebar">300 × 250 — Sidebar</div>
+
+    <div class="info-card">
+      <h3>Sessão atual</h3>
+      <div class="info-item"><div class="info-dot"></div><span id="statCount">0 sorteios</span> realizados</div>
+      <div class="info-item"><div class="info-dot"></div><span>Usa <code style="font-size:0.75rem;color:var(--c1)">crypto.getRandomValues</code> — aleatoriedade real.</span></div>
+    </div>
+  </div>
+</div><!-- /container -->
+
+<!-- RICH CONTENT -->
+<div class="rich-section">
+
+  <div class="rich-card">
+    <h2>O que é o <span>NúmerosSortear</span>?</h2>
+    <p>O <strong>NúmerosSortear.com</strong> é um gerador de números aleatórios gratuito, desenvolvido para utilizadores portugueses. Utilizamos a API <code style="color:var(--c1)">crypto.getRandomValues</code> do browser — o mesmo padrão criptográfico usado em segurança bancária — para garantir aleatoriedade verdadeira em cada sorteio.</p>
+    <p>Todas as operações são realizadas diretamente no teu browser, sem enviar dados para qualquer servidor. O site não guarda os números gerados, não requer registo e é completamente gratuito.</p>
+  </div>
+
+  <div class="tools-grid">
+    <div class="tool-info-card"><div class="icon">🎲</div><h3>Números Aleatórios</h3><p>Define intervalo e quantidade. Ideal para sorteios, rifas e seleção de participantes. Ativa "Únicos" para garantir que nenhum número se repete.</p></div>
+    <div class="tool-info-card"><div class="icon">🎯</div><h3>Dados Virtuais</h3><p>D4 ao D100, até 6 dados em simultâneo com total calculado. Perfeito para D&D, Pathfinder e outros jogos de tabuleiro.</p></div>
+    <div class="tool-info-card"><div class="icon">🪙</div><h3>Cara ou Coroa</h3><p>50/50 real. Lança uma moeda para decidir ou até 100 de uma vez para análise estatística.</p></div>
+    <div class="tool-info-card"><div class="icon">🔐</div><h3>Senha Segura</h3><p>Gera senhas com entropia criptográfica real. Define comprimento, maiúsculas, números e símbolos.</p></div>
+    <div class="tool-info-card"><div class="icon">🔀</div><h3>Sorteio de Opções</h3><p>Escreve qualquer lista — restaurantes, destinos, tarefas — e deixa o acaso escolher por ti.</p></div>
+  </div>
+
+  <div class="rich-card">
+    <h2>Perguntas Frequentes</h2>
+    <div class="faq-item">
+      <h3>Os números são verdadeiramente aleatórios?</h3>
+      <p>Sim. Usamos <code style="color:var(--c1)">crypto.getRandomValues()</code>, uma fonte de entropia criptograficamente segura fornecida pelo browser — diferente do <code style="color:var(--c1)">Math.random()</code> que é previsível. É o mesmo nível de segurança usado em banca online.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Posso usar as chaves geradas no Euromilhões ou Totoloto?</h3>
+      <p>Sim. As chaves seguem as regras oficiais de cada jogo. Podes usá-las diretamente nas apostas online ou em qualquer ponto de venda autorizado.</p>
+    </div>
+    <div class="faq-item">
+      <h3>O site guarda os números que gero?</h3>
+      <p>Não. Todo o processamento é local no teu browser. Nenhum dado é enviado para servidores. Os únicos dados recolhidos são de analytics anónimos e publicidade, conforme a nossa Política de Privacidade.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Como funciona o Número da Sorte do Totoloto?</h3>
+      <p>O Totoloto tem 5 números principais (1–49) e um Número da Sorte independente (1–13). No nosso gerador aparece sempre destacado a laranja para fácil identificação.</p>
+    </div>
+    <div class="faq-item">
+      <h3>O site é totalmente gratuito?</h3>
+      <p>Sim, sem registo e sem limites. O site é financiado por anúncios não intrusivos, que nos permitem mantê-lo gratuito para todos.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER AD -->
+<div style="display:flex;justify-content:center;padding:0 24px 32px;">
+  <div class="ad-banner" style="background:var(--white);">728 × 90 — Banner rodapé</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">números<span>sortear</span></div>
+  <p>Aleatoriedade real com <code style="color:var(--c1);font-size:0.75rem">crypto.getRandomValues</code> — 100% no browser.</p>
+  <div class="footer-links">
+    <a href="euromilhoes.html">Euromilhões</a>
+    <a href="totoloto.html">Totoloto</a>
+    <a href="eurodreams.html">EuroDreams</a>
+    <a href="privacidade.html">Privacidade</a>
+    <a href="termos.html">Termos</a>
+    <a href="mailto:andrecastroemail@gmail.com">Contacto</a>
+  </div>
+</footer>
+
+<script>
+  let sessionCount = 0;
+
+  function rand(min, max) {
+    const range = max - min + 1;
+    const arr = new Uint32Array(1);
+    crypto.getRandomValues(arr);
+    return min + (arr[0] % range);
+  }
+
+  function updateStats() {
+    sessionCount++;
+    document.getElementById('statCount').textContent = sessionCount + ' sorteios';
+  }
+
+  /* ── Número Aleatório ── */
+  function gerarNumero() {
+    const min = parseInt(document.getElementById('numMin').value) || 1;
+    const max = parseInt(document.getElementById('numMax').value) || 100;
+    const qty = Math.min(parseInt(document.getElementById('numQty').value) || 1, 20);
+    const unique = document.getElementById('numUnique').checked;
+    const box = document.getElementById('numResult');
+
+    if (min >= max) { box.innerHTML = '<span style="color:#e05a3a;font-size:0.85rem">Mínimo deve ser menor que máximo</span>'; return; }
+
+    let nums = [];
+    if (unique) {
+      const pool = Array.from({length: max - min + 1}, (_, i) => min + i);
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = rand(0, i); [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      nums = pool.slice(0, qty);
+    } else {
+      for (let i = 0; i < qty; i++) nums.push(rand(min, max));
+    }
+
+    box.innerHTML = qty === 1
+      ? `<span class="result-number">${nums[0]}</span>`
+      : nums.map(n => `<span class="result-tag">${n}</span>`).join('');
+
+    document.getElementById('numHistory').innerHTML = `Último: <span>${nums.join(', ')}</span>`;
+    updateStats();
+  }
+
+  /* ── Utilitário para sortear únicos ── */
+  function pickUnique(n, count) {
+    const pool = Array.from({length: n}, (_, i) => i + 1);
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = rand(0, i); [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    return pool.slice(0, count).sort((a, b) => a - b);
+  }
+
+  /* ── Dados ── */
+  const dotPatterns = {
+    1: [[1,1]],
+    2: [[0,0],[2,2]],
+    3: [[0,0],[1,1],[2,2]],
+    4: [[0,0],[0,2],[2,0],[2,2]],
+    5: [[0,0],[0,2],[1,1],[2,0],[2,2]],
+    6: [[0,0],[0,2],[1,0],[1,2],[2,0],[2,2]]
+  };
+
+  function renderDie(val, type) {
+    if (type !== '6') {
+      return `<div style="width:64px;height:64px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:1.7rem;font-weight:500;color:var(--c3);box-shadow:0 3px 12px rgba(0,0,0,0.15);border:1px solid #ddd;animation:rollDie .35s cubic-bezier(.34,1.56,.64,1)">${val}</div>`;
+    }
+    const grid = Array(9).fill('');
+    dotPatterns[val]?.forEach(([r,c]) => { grid[r*3+c] = '<div class="dot"></div>'; });
+    return `<div class="die">${grid.join('')}</div>`;
+  }
+
+  function lancarDados() {
+    const type = document.getElementById('diceType').value;
+    const qty  = Math.min(parseInt(document.getElementById('diceQty').value) || 1, 6);
+    const box  = document.getElementById('diceResult');
+    const vals = Array.from({length: qty}, () => rand(1, parseInt(type)));
+    box.innerHTML = `<div class="dice-display">${vals.map(v => renderDie(v, type)).join('')}</div>`;
+    const total = vals.reduce((a,b) => a+b, 0);
+    document.getElementById('diceTotal').innerHTML = qty > 1
+      ? `Total: <strong style="color:var(--c3);font-family:'DM Mono'">${total}</strong>` : '';
+    updateStats();
+  }
+
+  /* ── Moeda ── */
+  function lancarMoeda() {
+    const qty     = Math.min(parseInt(document.getElementById('coinQty').value) || 1, 100);
+    const box     = document.getElementById('coinResult');
+    const statsEl = document.getElementById('coinStats');
+    let caras = 0, coroas = 0;
+    const results = Array.from({length: qty}, () => rand(0, 1));
+    results.forEach(r => r === 0 ? caras++ : coroas++);
+
+    if (qty === 1) {
+      const isCara = results[0] === 0;
+      // Show neutral coin spinning; result coin + label appear after 1.2s
+      box.innerHTML = `
+        <div style="display:flex;align-items:center;gap:24px;justify-content:center;">
+          <div style="position:relative;width:90px;height:90px;flex-shrink:0;">
+            <div class="coin-spin" style="position:absolute;top:0;left:0;">🪙</div>
+            <div class="coin-result ${isCara ? 'heads' : 'tails'}" style="position:absolute;top:0;left:0;">${isCara ? '⚜️' : '🔵'}</div>
+          </div>
+          <div class="coin-label">
+            <div style="font-size:3rem;font-weight:700;color:${isCara ? 'var(--c2)' : 'var(--muted)'};line-height:1;letter-spacing:-1px;">${isCara ? 'CARA' : 'COROA'}</div>
+          </div>
+        </div>`;
+      statsEl.innerHTML = '';
+    } else {
+      box.innerHTML = `<div style="text-align:center">
+        <div style="font-size:2.4rem;font-weight:700;color:var(--c2)">${caras} cara${caras!==1?'s':''}</div>
+        <div style="font-size:1.6rem;font-weight:600;color:var(--muted)">${coroas} coroa${coroas!==1?'s':''}</div>
+      </div>`;
+      statsEl.innerHTML = `De ${qty} lançamentos — Cara: ${Math.round(caras/qty*100)}% · Coroa: ${Math.round(coroas/qty*100)}%`;
+    }
+    updateStats();
+  }
+
+  /* ── Senha ── */
+  let lastPass = '';
+  function gerarSenha() {
+    const len = parseInt(document.getElementById('passLen').value);
+    let chars = '';
+    if (document.getElementById('passUpper').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (document.getElementById('passLower').checked) chars += 'abcdefghijklmnopqrstuvwxyz';
+    if (document.getElementById('passNum').checked)   chars += '0123456789';
+    if (document.getElementById('passSym').checked)   chars += '!@#$%^&*()-_=+[]{}|;:,.<>?';
+    if (!chars) { document.getElementById('passResult').innerHTML = '<span style="color:var(--c3);font-size:0.85rem">Seleciona pelo menos um tipo</span>'; return; }
+    const arr = new Uint32Array(len);
+    crypto.getRandomValues(arr);
+    lastPass = Array.from(arr).map(v => chars[v % chars.length]).join('');
+    const strength = ['passUpper','passLower','passNum','passSym'].filter(id => document.getElementById(id).checked).length;
+    const labels = ['','Fraca','Média','Forte','Muito forte'];
+    const colors = ['','var(--c3)','var(--c2)','var(--c5)','var(--c5)'];
+    document.getElementById('passResult').innerHTML =
+      `<div style="width:100%;text-align:center;">
+        <span class="pass-output">${lastPass}</span>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;flex-wrap:wrap;">
+          <button id="copyBtn" onclick="copiarSenha()" style="display:inline-flex;align-items:center;gap:5px;background:#eef2ff;border:1px solid #c7d7fd;color:var(--c1);font-size:0.78rem;font-weight:600;padding:7px 16px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s;" onmouseover="this.style.background='#dbe5fd'" onmouseout="this.style.background='#eef2ff'">
+            📋 Copiar senha
+          </button>
+          <span style="font-size:0.72rem;color:${colors[strength]};font-weight:600;">${labels[strength]}</span>
+        </div>
+      </div>`;
+    updateStats();
+  }
+  function copiarSenha() {
+    navigator.clipboard.writeText(lastPass).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.innerHTML = '✅ Copiada!';
+      btn.style.background = '#e6f7f2';
+      btn.style.borderColor = '#a0dcc8';
+      btn.style.color = 'var(--c5)';
+      setTimeout(() => {
+        btn.innerHTML = '📋 Copiar';
+        btn.style.background = '#eef2ff';
+        btn.style.borderColor = '#c7d7fd';
+        btn.style.color = 'var(--c1)';
+      }, 2000);
+    });
+  }
+
+  /* ── Escolha Aleatória ── */
+  function limparEscolha() {
+    document.getElementById('choiceInput').value = '';
+    document.getElementById('choiceResult').innerHTML = '<span style=\"color:var(--muted);font-size:0.85rem;line-height:1.6\">Escreve as tuas opções acima ou escolhe um exemplo:<br><span style=\"color:var(--c6);font-weight:600\">🍕 Refeições · ✈️ Destinos · 🎉 Fim de semana · 📺 Séries · ⚽ Desporto</span></span>';
+    const el = document.getElementById('choiceCount');
+    if (el) el.textContent = '';
+    recentChoices.length = 0; // reset history on clear
+  }
+
+  const presets = {
+    refeicoes:   "Pizza\nSushi\nHambúrguer\nTacos\nMassa\nFrancesinha\nSalada\nGrelhado",
+    destinos:    "Porto\nLisboa\nAlgarve\nMadeira\nAçores\nEspanha\nItália\nParis\nTailândia\nJapão\nIndonésia",
+    fins_semana: "Cinema\nJantar fora\nPasseio na natureza\nDia em casa\nPraia\nMuseu\nConcerto",
+    series:      "Breaking Bad\nGame of Thrones\nStranger Things\nThe Office\nBlack Mirror\nPeaky Blinders",
+    desporto:    "Futebol\nTénis\nBasquetebol\nNatação\nCiclismo\nGinásio\nCorrida"
+  };
+
+  function loadPreset(key) {
+    document.getElementById('choiceInput').value = presets[key];
+    recentChoices.length = 0; // reset history when loading new preset
+    updateChoiceCount();
+  }
+
+  function updateChoiceCount() {
+    const lines = document.getElementById('choiceInput').value.split('\n').map(l=>l.trim()).filter(Boolean);
+    const el = document.getElementById('choiceCount');
+    if (el) el.textContent = lines.length > 0 ? lines.length + ' opções' : '';
+  }
+
+  // Track last 2 results to avoid repeating
+  const recentChoices = [];
+
+  // ── Quick Lotaria generators (suportam múltiplas apostas) ──
+  function quickToto() {
+    const qty = parseInt(document.getElementById('totoQty').value) || 1;
+    let html = '';
+    for (let i = 0; i < qty; i++) {
+      const nums = pickUnique(49, 5);
+      const lucky = rand(1, 13);
+      const prefix = qty > 1 ? `<span class="bet-num">${i+1}.</span> ` : '';
+      html += `<div class="bet-row">${prefix}${nums.join('<span class="sep">-</span>')} <span class="sep">+</span> <span class="lucky">${lucky}</span></div>`;
+    }
+    document.getElementById('quickToto').innerHTML = html;
+    updateStats();
+  }
+  function quickEuro() {
+    const qty = parseInt(document.getElementById('euroQty').value) || 1;
+    let html = '';
+    for (let i = 0; i < qty; i++) {
+      const nums  = pickUnique(50, 5);
+      const stars = pickUnique(12, 2);
+      const prefix = qty > 1 ? `<span class="bet-num">${i+1}.</span> ` : '';
+      html += `<div class="bet-row">${prefix}${nums.join('<span class="sep">-</span>')} <span class="sep">+</span> <span class="stars">${stars.join('-')}</span></div>`;
+    }
+    document.getElementById('quickEuro').innerHTML = html;
+    updateStats();
+  }
+  function quickDream() {
+    const qty = parseInt(document.getElementById('dreamQty').value) || 1;
+    let html = '';
+    for (let i = 0; i < qty; i++) {
+      const nums = pickUnique(40, 6);
+      const dream = rand(1, 5);
+      const prefix = qty > 1 ? `<span class="bet-num">${i+1}.</span> ` : '';
+      html += `<div class="bet-row">${prefix}${nums.join('<span class="sep">-</span>')} <span class="sep">+</span> <span class="dream">${dream}</span></div>`;
+    }
+    document.getElementById('quickDream').innerHTML = html;
+    updateStats();
+  }
+
+  function escolhaAleatoria() {
+    const lines = document.getElementById('choiceInput').value.split('\n').map(l=>l.trim()).filter(Boolean);
+    const box   = document.getElementById('choiceResult');
+    updateChoiceCount();
+    if (!lines.length) { box.innerHTML = '<span style="color:var(--muted);font-size:0.85rem;line-height:1.6">Escreve as tuas opções acima ou escolhe um exemplo:<br><span style="color:var(--c6);font-weight:600">🍕 Refeições · ✈️ Destinos · 🎉 Fim de semana · 📺 Séries · ⚽ Desporto</span></span>'; return; }
+
+    // Filter out last 2 results if there are enough options
+    let available = lines.filter(l => !recentChoices.includes(l));
+    if (available.length === 0) available = lines; // fallback if list is too short
+
+    const idx = rand(0, available.length - 1);
+    const chosen = available[idx];
+
+    // Update recent history (keep last 2)
+    recentChoices.push(chosen);
+    if (recentChoices.length > 2) recentChoices.shift();
+
+    box.innerHTML = `<div style="text-align:center">
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px;font-weight:600">A sorte escolheu</div>
+      <div style="font-size:2.2rem;font-weight:700;color:var(--c6);animation:popIn .28s cubic-bezier(.34,1.56,.64,1);line-height:1.2;">${chosen}</div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:8px;">de ${lines.length} opções</div>
+      <button id="shareChoiceBtn" onclick="partilharEscolha('${chosen.replace(/'/g, "\\'")}')" style="display:inline-flex;align-items:center;gap:7px;margin-top:16px;background:var(--c6);border:none;color:#fff;font-size:0.8rem;font-weight:600;padding:9px 18px;border-radius:100px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;box-shadow:0 2px 8px rgba(232,80,122,0.25);letter-spacing:0.1px;" onmouseover="this.style.background='#d03868';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='var(--c6)';this.style.transform='translateY(0)'"><span id="shareIcon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></span><span id="shareTxt">Partilhar</span></button>
+    </div>`;
+    updateStats();
+  }
+
+  function partilharEscolha(resultado) {
+    const texto = `🎲 A sorte escolheu: ${resultado}!\n\nExperimenta tu também em numerossortear.com`;
+    const btn = document.getElementById('shareChoiceBtn');
+    // Try native share (mobile) first
+    if (navigator.share) {
+      navigator.share({
+        title: 'NúmerosSortear',
+        text: texto,
+        url: 'https://numerossortear.com'
+      }).catch(() => {});
+    } else {
+      // Desktop fallback — copy to clipboard
+      navigator.clipboard.writeText(texto + ' https://numerossortear.com').then(() => {
+        const txt = document.getElementById('shareTxt');
+        if (txt) {
+          txt.textContent = 'Copiado!';
+          setTimeout(() => txt.textContent = 'Partilhar', 2200);
+        }
+      });
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.activeElement.id?.startsWith('num')) gerarNumero();
+  });
+</script>
+</body>
+</html>
