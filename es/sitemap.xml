@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- PT -->
+  <url>
+    <loc>https://numerossortear.com/</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://numerossortear.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://numerossortear.com/es/"/>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://numerossortear.com/euromilhoes.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://numerossortear.com/euromilhoes.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://numerossortear.com/es/euromillones.html"/>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://numerossortear.com/totoloto.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://numerossortear.com/eurodreams.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://numerossortear.com/eurodreams.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://numerossortear.com/es/eurodreams.html"/>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <!-- ES -->
+  <url>
+    <loc>https://numerossortear.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://numerossortear.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://numerossortear.com/"/>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://numerossortear.com/es/euromillones.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://numerossortear.com/es/euromillones.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://numerossortear.com/euromilhoes.html"/>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://numerossortear.com/es/primitiva.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://numerossortear.com/es/bonoloto.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://numerossortear.com/es/gordo.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://numerossortear.com/es/eurodreams.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://numerossortear.com/es/eurodreams.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://numerossortear.com/eurodreams.html"/>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <!-- Legal -->
+  <url>
+    <loc>https://numerossortear.com/privacidade.html</loc>
+    <priority>0.5</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://numerossortear.com/termos.html</loc>
+    <priority>0.5</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+</urlset>
