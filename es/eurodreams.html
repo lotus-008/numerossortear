@@ -32,7 +32,9 @@
     .hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:12px;}.hero h1 span{color:var(--c4);}.hero p{color:var(--muted);font-size:1rem;max-width:560px;margin:0 auto;}
     .container{max-width:860px;margin:28px auto;padding:0 24px;}
     .card{background:var(--white);border:1px solid var(--border);border-radius:var(--card-radius);box-shadow:var(--shadow);padding:36px;margin-bottom:20px;}.gen-box{text-align:center;}
-    .result-box{background:var(--faint);border:1px solid var(--border);border-radius:8px;padding:28px;min-height:90px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
+    .result-box{background:var(--faint);border:1px solid var(--border);border-radius:8px;padding:28px;min-height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;margin-bottom:20px;}
+    .result-box .lotto-row{justify-content:center;}
+    .bet-num{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--muted);margin-right:2px;}
     .result-placeholder{color:var(--muted);font-size:0.85rem;}
     .lotto-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;}.lotto-sep{font-size:1.4rem;color:var(--muted);padding:0 4px;}
     .lotto-label{width:100%;text-align:right;font-size:0.62rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-top:4px;}
@@ -57,6 +59,21 @@
 <div class="hero"><div class="hero-pill">🌙 Generador de EuroDreams</div><h1>Genera tu <span>clave de EuroDreams</span></h1><p>6 números y el Dream sorteados con aleatoriedad real, gratis y sin registro.</p></div>
 <div class="container">
   <div class="card gen-box">
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;">
+      <label for="qty" style="font-size:0.8rem;font-weight:600;color:var(--muted);">Apuestas:</label>
+      <select id="qty" style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:500;padding:7px 12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--white);color:var(--text);cursor:pointer;">
+        <option value="1">1 apuesta</option>
+        <option value="2">2 apuestas</option>
+        <option value="3">3 apuestas</option>
+        <option value="4">4 apuestas</option>
+        <option value="5">5 apuestas</option>
+        <option value="6">6 apuestas</option>
+        <option value="7">7 apuestas</option>
+        <option value="8">8 apuestas</option>
+        <option value="9">9 apuestas</option>
+        <option value="10">10 apuestas</option>
+      </select>
+    </div>
     <div class="result-box" id="result"><span class="result-placeholder">Haz clic para generar tu clave</span></div>
     <button class="btn" onclick="gen()">🎰 Generar Clave EuroDreams</button>
     <div class="history" id="history"></div>
@@ -81,11 +98,22 @@
   <div class="card"><h2>Otras herramientas</h2><p><a class="cta-link" href="/es/euromillones.html">Generador de EuroMillones →</a></p><p><a class="cta-link" href="/es/primitiva.html">Generador de La Primitiva →</a></p><p><a class="cta-link" href="/es/bonoloto.html">Generador de BonoLoto →</a></p><p><a class="cta-link" href="/es/gordo.html">Generador de El Gordo →</a></p><p><a class="cta-link" href="/es/">Todas las herramientas →</a></p></div>
   <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-top:8px;"><strong style="color:var(--text);">Aviso:</strong> Sitio independiente, no afiliado a Loterías y Apuestas del Estado. Jugar está prohibido a menores de 18 años.</p>
 </div>
-<footer><a href="/es/" class="logo" style="font-size:1rem;">números<span>sortear</span></a><p>© 2026 numerossortear.com</p><div class="footer-links"><a href="/es/">Inicio</a><a href="/">Português</a></div></footer>
+<footer><a href="/es/" class="logo" style="font-size:1rem;">números<span>sortear</span></a><p>© 2026 numerossortear.com</p><div class="footer-links"><a href="/es/">Inicio</a><a href="/">Português</a><a href="/es/privacidad.html">Privacidad</a><a href="/es/terminos.html">Términos</a></div></footer>
 <script>
   function rand(a,b){const r=b-a+1,u=new Uint32Array(1);crypto.getRandomValues(u);return a+(u[0]%r);}
   function pick(n,c){const p=Array.from({length:n},(_,i)=>i+1);for(let i=p.length-1;i>0;i--){const j=rand(0,i);[p[i],p[j]]=[p[j],p[i]];}return p.slice(0,c).sort((a,b)=>a-b);}
-  function gen(){const n=pick(40,6);const d=rand(1,5);document.getElementById('result').innerHTML=`<div class="lotto-row">${n.map(x=>`<div class="lotto-ball">${String(x).padStart(2,'0')}</div>`).join('')}<div class="lotto-sep">+</div><div class="lotto-ball dream">${d}</div><div class="lotto-label">Dream</div></div>`;document.getElementById('history').innerHTML=`Clave: <span>${n.join('-')}</span> + Dream: <span class="dream-hist">${d}</span>`;}
+  function gen(){
+    const qty=Math.min(parseInt(document.getElementById('qty').value)||1,10);
+    let rows='',lastN=[],lastD=0;
+    for(let i=0;i<qty;i++){
+      const n=pick(40,6);const d=rand(1,5);
+      lastN=n;lastD=d;
+      const label=qty>1?`<span class="bet-num">${i+1}.</span> `:'';
+      rows+=`<div class="lotto-row" style="margin-bottom:${qty>1?'10px':'0'};">${label}${n.map(x=>`<div class="lotto-ball">${String(x).padStart(2,'0')}</div>`).join('')}<div class="lotto-sep">+</div><div class="lotto-ball dream">${d}</div>${qty===1?'<div class="lotto-label">Dream</div>':''}</div>`;
+    }
+    document.getElementById('result').innerHTML=rows;
+    document.getElementById('history').innerHTML=qty>1?`${qty} claves generadas`:`Clave: <span>${lastN.join('-')}</span> + Dream: <span class="dream-hist">${lastD}</span>`;
+  }
 </script>
 </body>
 </html>
