@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLR4N2QX5C"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZLR4N2QX5C');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Generador de Números Powerball — Gratis | numerossortear.com</title>
-  <meta name="description" content="Genera tus números de Powerball al instante y gratis. 5 números del 1 al 69 más la Powerball roja del 1 al 26. Aleatorios de verdad, sin registro."/>
-  <meta name="keywords" content="generador powerball, números powerball aleatorios, powerball quick pick español, generar números powerball gratis"/>
-  <link rel="canonical" href="https://numerossortear.com/es/powerball"/>
-  <link rel="alternate" hreflang="es" href="https://numerossortear.com/es/powerball"/>
+  <title>Powerball Number Generator — Free Random Numbers | numerossortear.com</title>
+  <meta name="description" content="Generate your Powerball numbers instantly and for free. 5 numbers from 1–69 plus the red Powerball from 1–26. True random, no registration required."/>
+  <meta name="keywords" content="powerball number generator, random powerball numbers, powerball quick pick, generate powerball numbers free"/>
+  <link rel="canonical" href="https://numerossortear.com/en/powerball"/>
   <link rel="alternate" hreflang="en" href="https://numerossortear.com/en/powerball"/>
+  <link rel="alternate" hreflang="es" href="https://numerossortear.com/es/powerball"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
@@ -49,54 +49,62 @@
 </head>
 <body>
 <header>
-  <a href="/es/" class="logo">números<span>sortear</span></a>
+  <a href="/en/" class="logo">números<span>sortear</span></a>
   <div class="header-right">
-    <nav><a href="/es/">Inicio</a><a href="/es/powerball">Powerball</a><a href="/es/megamillions">Mega Millions</a><a href="/es/euromillones">EuroMillones</a><a href="/es/primitiva">Primitiva</a></nav>
-    <div class="lang-switch"><a href="/en/powerball" class="lang-btn">EN</a><a href="/es/powerball" class="lang-btn active">ES</a></div>
+    <nav>
+      <a href="/en/">Home</a>
+      <a href="/en/powerball">Powerball</a>
+      <a href="/en/megamillions">Mega Millions</a>
+    </nav>
+    <div class="lang-switch">
+      <a href="/en/powerball" class="lang-btn active">EN</a>
+      <a href="/es/powerball" class="lang-btn">ES</a>
+    </div>
   </div>
 </header>
-<div class="breadcrumb"><a href="/es/">Inicio</a> › Powerball</div>
+<div class="breadcrumb"><a href="/en/">Home</a> › Powerball</div>
 <div class="hero">
-  <div class="hero-pill">🎱 Lotería de EE.UU.</div>
-  <h1>Generador de <span>Powerball</span></h1>
-  <p>5 bolas blancas (1–69) + 1 Powerball roja (1–26). Números aleatorios reales, gratis y sin registro.</p>
+  <div class="hero-pill">🎱 US Lottery Generator</div>
+  <h1>Powerball <span>Number Generator</span></h1>
+  <p>5 white balls (1–69) + 1 red Powerball (1–26). True random numbers, free and instant.</p>
 </div>
 <div class="container">
   <div class="card gen-box">
     <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;">
-      <label for="qty" style="font-size:0.8rem;font-weight:600;color:var(--muted);">Jugadas:</label>
+      <label for="qty" style="font-size:0.8rem;font-weight:600;color:var(--muted);">Plays:</label>
       <select id="qty" style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:500;padding:7px 12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--white);color:var(--text);cursor:pointer;">
-        <option value="1">1 jugada</option><option value="2">2 jugadas</option><option value="3">3 jugadas</option><option value="4">4 jugadas</option><option value="5">5 jugadas</option><option value="6">6 jugadas</option><option value="7">7 jugadas</option><option value="8">8 jugadas</option><option value="9">9 jugadas</option><option value="10">10 jugadas</option>
+        <option value="1">1 play</option><option value="2">2 plays</option><option value="3">3 plays</option><option value="4">4 plays</option><option value="5">5 plays</option><option value="6">6 plays</option><option value="7">7 plays</option><option value="8">8 plays</option><option value="9">9 plays</option><option value="10">10 plays</option>
       </select>
     </div>
-    <div class="result-box" id="result"><span class="result-placeholder">Haz clic para generar tus números</span></div>
-    <button class="btn" onclick="gen()">🎱 Generar Números Powerball</button>
+    <div class="result-box" id="result"><span class="result-placeholder">Click the button to generate your numbers</span></div>
+    <button class="btn" onclick="gen()">🎱 Generate Powerball Numbers</button>
     <div class="history" id="history"></div>
-    <p style="margin-top:18px;text-align:center;"><a href="https://www.powerball.com" target="_blank" rel="noopener" class="play-link">Jugar en web oficial ↗</a></p>
+    <p style="margin-top:18px;text-align:center;"><a href="https://www.powerball.com" target="_blank" rel="noopener" class="play-link">Play on official website ↗</a></p>
   </div>
   <div class="card">
-    <h2>Cómo jugar <span>Powerball</span></h2>
-    <p>Powerball es una de las loterías más populares de EE.UU., disponible en 45 estados, Washington D.C., Puerto Rico y las Islas Vírgenes. Elige <strong>5 números del 1 al 69</strong> (bolas blancas) y <strong>1 Powerball del 1 al 26</strong> (bola roja). Cada jugada cuesta $2.</p>
-    <p>Los sorteos se realizan cada <strong>lunes, miércoles y sábado</strong> a las 10:59 p.m. ET. El jackpot empieza en $20 millones.</p>
-    <h3>¿Qué es la Powerball?</h3>
-    <p>La Powerball es una bola roja extraída de un bombo separado (1–26), independiente de las 5 blancas. Necesitas las 5 bolas blancas más la Powerball para ganar el jackpot. La Powerball puede coincidir con uno de tus números blancos.</p>
-    <h3>¿Por qué usar números aleatorios?</h3>
-    <p>Todas las combinaciones tienen exactamente las mismas probabilidades. Nuestro generador usa <code style="color:var(--c1)">crypto.getRandomValues()</code>, el mismo estándar criptográfico que la banca online.</p>
+    <h2>How to Play <span>Powerball</span></h2>
+    <p>Powerball is one of America's most popular lottery games, available in 45 states, Washington D.C., Puerto Rico, and the U.S. Virgin Islands. To play, select <strong>5 numbers from 1 to 69</strong> (white balls) and <strong>1 Powerball number from 1 to 26</strong> (red ball). Each play costs $2.</p>
+    <p>Drawings are held every <strong>Monday, Wednesday, and Saturday</strong> at 10:59 p.m. ET. The jackpot starts at $20 million and grows until someone wins.</p>
+    <h3>What is the Powerball?</h3>
+    <p>The Powerball is a separate red ball drawn from a pool of 1 to 26, independently from the 5 white balls. You need all 5 white balls plus the Powerball to win the jackpot. The Powerball can be the same number as one of your white balls.</p>
+    <h3>Why use random numbers?</h3>
+    <p>Every combination has exactly the same odds. Our generator uses <code style="color:var(--c1)">crypto.getRandomValues()</code> — the same cryptographic standard used in online banking — guaranteeing true, unbiased randomness.</p>
   </div>
   <div class="card">
-    <h2>Preguntas Frecuentes</h2>
-    <div class="faq-item"><h3>¿Los números generados son válidos para jugar?</h3><p>Sí. Siguen las reglas oficiales de Powerball (5 del 1–69 y 1 Powerball del 1–26) y pueden usarse en cualquier punto de venta autorizado.</p></div>
-    <div class="faq-item"><h3>¿Puedo generar varias jugadas a la vez?</h3><p>Sí. Usa el selector de jugadas — elige entre 1 y 10 y genera todas de un clic. Cada jugada es completamente independiente y aleatoria.</p></div>
-    <div class="faq-item"><h3>¿Cuándo son los sorteos de Powerball?</h3><p>Cada lunes, miércoles y sábado a las 10:59 p.m. ET. El cierre de ventas suele ser aproximadamente una hora antes.</p></div>
-    <div class="faq-item"><h3>¿Es gratis?</h3><p>Sí, completamente gratis, sin registro y sin límites.</p></div>
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item"><h3>Are the generated numbers valid to play?</h3><p>Yes. They follow Powerball's official rules (5 numbers from 1–69 and 1 Powerball from 1–26) and can be used at any authorized retailer or the official Powerball website.</p></div>
+    <div class="faq-item"><h3>Can I generate multiple plays at once?</h3><p>Yes! Use the "Plays" selector above — choose between 1 and 10 and generate them all in one click. Each play is completely independent.</p></div>
+    <div class="faq-item"><h3>When are Powerball drawings?</h3><p>Every Monday, Wednesday, and Saturday at 10:59 p.m. ET. Sales cut-off is typically around one hour before the drawing.</p></div>
+    <div class="faq-item"><h3>Can the Powerball match one of my 5 white ball numbers?</h3><p>Yes. The Powerball is drawn from a separate pool (1–26), independent of the 5 white balls (1–69). No restriction applies.</p></div>
+    <div class="faq-item"><h3>Is this generator free?</h3><p>Yes, completely free, no registration, no limits.</p></div>
   </div>
-  <div class="card"><h2>Otros generadores</h2><p><a class="cta-link" href="/es/megamillions">Generador de Mega Millions →</a></p><p><a class="cta-link" href="/es/euromillones">Generador de EuroMillones →</a></p><p><a class="cta-link" href="/es/">Todas las herramientas →</a></p></div>
-  <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-top:8px;"><strong style="color:var(--text);">Aviso:</strong> Sitio independiente, no afiliado con Powerball ni la Multi-State Lottery Association. Debes tener 18+. Juega responsablemente.</p>
+  <div class="card"><h2>Other generators</h2><p><a class="cta-link" href="/en/megamillions">Mega Millions Number Generator →</a></p><p><a class="cta-link" href="/en/">All US lottery tools →</a></p></div>
+  <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-top:8px;"><strong style="color:var(--text);">Disclaimer:</strong> Independent site, not affiliated with Powerball or the Multi-State Lottery Association. Must be 18+. Play responsibly.</p>
 </div>
 <footer>
-  <a href="/es/" class="logo" style="font-size:1rem;">números<span>sortear</span></a>
+  <a href="/en/" class="logo" style="font-size:1rem;">números<span>sortear</span></a>
   <p>© 2026 numerossortear.com</p>
-  <div class="footer-links"><a href="/es/">Inicio</a><a href="/en/powerball">English</a><a href="/">Português</a><a href="/es/privacidad">Privacidad</a><a href="/es/terminos">Términos</a></div>
+  <div class="footer-links"><a href="/en/">Home</a><a href="/es/powerball">Español</a><a href="/">Português</a></div>
 </footer>
 <script>
   function rand(a,b){const r=b-a+1,u=new Uint32Array(1);crypto.getRandomValues(u);return a+(u[0]%r);}
@@ -110,7 +118,7 @@
       rows+=`<div class="lotto-row" style="margin-bottom:${qty>1?'10px':'0'};">${label}${n.map(x=>`<div class="lotto-ball">${String(x).padStart(2,'0')}</div>`).join('')}<div class="lotto-sep">+</div><div class="lotto-ball powerball">${String(p).padStart(2,'0')}</div>${qty===1?'<div class="lotto-label">Powerball</div>':''}</div>`;
     }
     document.getElementById('result').innerHTML=rows;
-    document.getElementById('history').innerHTML=qty>1?`${qty} jugadas generadas`:`Números: <span>${lastN.join('-')}</span> + Powerball: <span class="pb-hist">${lastP}</span>`;
+    document.getElementById('history').innerHTML=qty>1?`${qty} plays generated`:`Numbers: <span>${lastN.join('-')}</span> + Powerball: <span class="pb-hist">${lastP}</span>`;
   }
 </script>
 </body>
